@@ -1,0 +1,224 @@
+.best-sellers {
+    margin: 100px 0;
+}
+
+.bs-banner {
+    background-color: var(--gray);
+    background-image: none;
+    padding: 60px 40px;
+    border-radius: 3px;
+    margin: 0;
+}
+
+.bs-content {
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+
+.bs-scroll-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.bs-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.bs-cards {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+}
+
+.bs-card {
+    background-color: var(--white);
+    border-radius: 3px;
+    width: 200px;
+    flex-shrink: 0;
+    text-decoration: none;
+    color: var(--black);
+    overflow: hidden;
+    border: 0.5px solid #e0e0e0;
+}
+
+.bs-card-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background-color: var(--white);
+}
+
+.bs-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+}
+
+/* WISHLIST BUTTON */
+.bs-wishlist {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+.bs-wishlist:hover {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.bs-wishlist svg {
+    font-size: 16px;
+}
+
+/* CARD INFO */
+.bs-card-info {
+    padding: 12px;
+}
+
+.bs-card-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bs-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bs-colour-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 0.5px solid rgb(7, 7, 7);
+    outline: 1.5px solid rgb(204, 204, 204);
+    flex-shrink: 0;
+}
+
+.bs-price {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue);
+    background-color: rgba(0, 87, 255, 0.08); /* very light blue bg */
+    padding: 3px 8px;
+    border-radius: 3px;
+    border-left: 2px solid var(--blue); /* accent left border */
+}
+
+.bs-top-row {
+    display: flex;
+    justify-content: flex-end; /* see all on the right */
+    margin-bottom: 20px;
+}
+
+.bs-scroll-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.bs-scroll-btn {
+    background-color: var(--white);
+    border: 0.5px solid #e0e0e0;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    min-width: 42px; /* prevents shrinking */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 26px;
+    color: var(--black);
+}
+
+.bs-scroll-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bs-scroll-btn:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+.bs-scroll-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1; /* takes remaining space between buttons */
+}
+
+.bs-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.bs-see-all {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    text-decoration: none;
+    border: 0.5px solid var(--black);
+    border-radius: 3px;
+    padding: 6px 14px;
+    transition: all 0.2s ease;
+}
+
+.bs-see-all:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+@media (max-width: 1024px) {
+    .bs-banner {
+        margin: 0;
+        padding: 40px 24px;
+    }
+
+    .bs-card {
+        width: 220px;
+    }
+
+    .bs-card-image {
+        height: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bs-banner {
+        margin: 0;
+        padding: 30px 16px;
+    }
+
+    .bs-scroll-btn {
+        display: none;
+    }
+
+    .bs-card {
+        width: 180px;
+    }
+
+    .bs-card-image {
+        height: 180px;
+    }
+}

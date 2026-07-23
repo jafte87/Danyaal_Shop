@@ -63,7 +63,13 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(f"{self.brand}-{self.model}-{self.storage}-{self.colour}")
+            base_slug = slugify(f"{self.brand}-{self.model}-{self.storage}-{self.colour}")
+            slug = base_slug
+            counter = 1
+            while Product.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -199,10 +205,17 @@ class Newsletter(models.Model):
     
 
 class Banner(models.Model):
+    PAGE_CHOICES = [
+        ('home', 'Home'),
+        ('shop', 'Shop'),
+        ('sell', 'Sell Your Phone'),
+    ]
     image = models.ImageField(upload_to='banners/')
+    mobile_image = models.ImageField(upload_to='banners/', blank=True, null=True)
     title = models.CharField(max_length=255, blank=True)
     subtitle = models.CharField(max_length=255, blank=True)
     link = models.URLField(blank=True)
+    page = models.CharField(max_length=20, choices=PAGE_CHOICES, default='home')
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0)
 
@@ -210,4 +223,4 @@ class Banner(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return self.title or f"Banner #{self.id}"
+        return f"{self.page} - {self.title or f'Banner #{self.id}'}"

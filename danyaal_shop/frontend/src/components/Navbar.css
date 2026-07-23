@@ -1,0 +1,330 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --black: #111111;
+    --white: #ffffff;
+    --blue: #0057FF;
+    --gray: #f4f4f4;
+    --text-gray: #6b6b6b;
+}
+
+.nav {
+    background-color: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* TOP NAV */
+.nav-top {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 16px 40px;
+    gap: 20px;
+}
+
+/* LOGO */
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* SEARCH BAR - desktop */
+.list-search-bar {
+    position: relative;
+    justify-self: center;
+    width: 180%;
+    max-width: 500px;
+}
+
+.list-search-bar input {
+    width: 100%;
+    padding: 8px 35px 8px 12px;
+    border: 1.5px solid var(--gray);
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    background-color: var(--gray);
+    transition: border-color 0.2s ease;
+}
+
+.list-search-bar input:focus {
+    border-color: var(--blue);
+    background-color: var(--white);
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-gray);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.search-icon:hover {
+    color: var(--blue);
+}
+
+/* ICONS + BUTTONS */
+.icons-btns {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.icons-btns button {
+    background-color: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.icons-btns button:hover {
+    background-color: var(--blue);
+}
+
+.icons-btns a {
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.icons-btns a:hover {
+    color: var(--blue);
+}
+
+.icons-btns svg {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* CART BADGE */
+.cart-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* HAMBURGER - hidden on desktop */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    color: var(--black);
+    font-size: 24px;
+    align-items: center;
+}
+
+/* Mobile search icon - hidden on desktop */
+.mobile-search-icon {
+    display: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--black);
+    transition: color 0.2s ease;
+}
+
+.mobile-search-icon:hover {
+    color: var(--blue);
+}
+
+/* MOBILE SEARCH BAR */
+.mobile-search-bar {
+    position: relative;
+    padding: 10px 20px;
+    background-color: var(--white);
+    border-top: 0.5px solid var(--gray);
+}
+
+.mobile-search-bar input {
+    width: 100%;
+    padding: 10px 40px 10px 12px;
+    border: 1.5px solid var(--blue);
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    background-color: var(--white);
+}
+
+.mobile-search-bar svg {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--blue);
+}
+
+/* BOTTOM NAV LINKS */
+.nav-bottom {
+    border-top: 0.5px solid var(--gray);
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-bottom ul {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.nav-bottom ul li a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 0;
+    display: block;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.nav-bottom ul li a:hover {
+    color: var(--blue);
+    border-bottom: 2px solid var(--blue);
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 20px 40px;
+    border-top: 0.5px solid var(--gray);
+}
+
+.mobile-menu.open {
+    display: flex;
+}
+
+.mobile-menu li {
+    list-style: none;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--gray);
+}
+
+.mobile-menu li a {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.mobile-menu li a:hover {
+    color: var(--blue);
+}
+
+.mobile-menu .sell-btn {
+    display: inline-block;
+    background-color: var(--black);
+    color: var(--white);
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu .sell-btn:hover {
+    background-color: var(--blue);
+    color: white;
+}
+
+/* RESPONSIVE */
+/* TABLET - iPad (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .nav-top {
+        padding: 14px 24px;
+        gap: 12px;
+    }
+
+    .list-search-bar {
+        max-width: 300px;
+        width: 100%;
+    }
+
+    .icons-btns button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .icons-btns {
+        gap: 10px;
+    }
+
+    .icons-btns svg {
+        font-size: 20px;
+    }
+}
+
+/* MOBILE - phones (max 768px) */
+@media (max-width: 768px) {
+    .nav-top {
+        padding: 12px 20px;
+        grid-template-columns: auto 1fr;
+    }
+
+    .desktop-search {
+        display: none;
+    }
+
+    .icons-btns button {
+        display: none;
+    }
+
+    .mobile-search-icon {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .icons-btns {
+        gap: 12px;
+    }
+
+    .search-open .mobile-search-icon {
+        display: none;
+    }
+}

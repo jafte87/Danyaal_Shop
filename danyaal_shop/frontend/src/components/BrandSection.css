@@ -1,0 +1,228 @@
+.brand-section {
+    margin: 100px 0;
+}
+
+.brand-banner {
+    background-color: var(--gray);
+    padding: 60px 40px;
+    border-radius: 3px;
+    margin: 0;
+}
+
+.brand-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.brand-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.brand-see-all {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    text-decoration: none;
+    border: 0.5px solid var(--black);
+    border-radius: 3px;
+    padding: 6px 14px;
+    transition: all 0.2s ease;
+}
+
+.brand-see-all:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+.brand-scroll-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-scroll-btn {
+    background-color: var(--white);
+    border: 0.5px solid #e0e0e0;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 26px;
+    color: var(--black);
+}
+
+.brand-scroll-btn:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+.brand-scroll-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+}
+
+.brand-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.brand-cards {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+}
+
+.brand-card {
+    background-color: var(--white);
+    border-radius: 3px;
+    width: 200px;
+    flex-shrink: 0;
+    text-decoration: none;
+    color: var(--black);
+    overflow: hidden;
+    border: 0.5px solid #e0e0e0;
+}
+
+.brand-card-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background-color: var(--white);
+}
+
+.brand-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+}
+
+.brand-wishlist {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+.brand-wishlist:hover {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.brand-wishlist svg {
+    font-size: 16px;
+}
+
+.brand-card-info {
+    padding: 12px;
+}
+
+.brand-card-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.brand-card-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand-colour-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 0.5px solid rgb(7, 7, 7);
+    outline: 1.5px solid rgb(204, 204, 204);
+    flex-shrink: 0;
+}
+
+.brand-price {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue);
+    background-color: rgba(0, 87, 255, 0.08);
+    padding: 3px 8px;
+    border-radius: 3px;
+    border-left: 2px solid var(--blue);
+}
+
+/* hide unused classes */
+.brand-content,
+.brand-banner-desktop,
+.brand-banner-mobile,
+.brand-banner-placeholder,
+.brand-mobile-header,
+.brand-mobile-title,
+.brand-mobile-see-all,
+.brand-scroll-left,
+.brand-scroll-right,
+.brand-scroll-mobile-left,
+.brand-scroll-area {
+    display: none;
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .brand-banner {
+        padding: 40px 24px;
+    }
+
+    .brand-card {
+        width: 220px;
+    }
+
+    .brand-card-image {
+        height: 220px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .brand-section {
+        margin: 60px 0;
+    }
+
+    .brand-banner {
+        padding: 30px 16px;
+    }
+
+    /* hide arrows on mobile — user scrolls with finger */
+    .brand-scroll-btn {
+        display: none;
+    }
+
+    .brand-card {
+        width: 180px;
+    }
+
+    .brand-card-image {
+        height: 180px;
+    }
+}

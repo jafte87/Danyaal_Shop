@@ -1,0 +1,88 @@
+import { Link } from 'react-router-dom'
+import { LuHeart } from 'react-icons/lu'
+import { useRef } from 'react'
+import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
+import './BestSellers.css'
+
+function BestSellers({ products }) {
+    const scrollRef = useRef(null)
+
+    const scroll = (direction) => {
+    if (direction === 'left') {
+        scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' })
+    } else {
+        scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' })
+    }
+}
+    
+
+    return (
+    <section className="best-sellers">
+        <div className="bs-banner">
+            <div className="bs-content">
+                {/* TOP ROW — see all only */}
+                <div className="bs-top-row">
+                    <Link to="/shop?is_best_seller=true" className="bs-see-all">
+                        See All
+                    </Link>
+                </div>
+
+                {/* SCROLL AREA WITH SIDE BUTTONS */}
+                <div className="bs-scroll-container">
+                    <button className="bs-scroll-btn bs-scroll-left" onClick={() => scroll('left')}>
+                        <MdChevronLeft />
+                    </button>
+
+                    <div className="bs-scroll-wrapper" ref={scrollRef}>
+                        <div className="bs-cards">
+                            {products?.slice(0, 10).map(product => (
+                                <Link
+                                    to={`/product/${product.slug}`}
+                                    key={product.id}
+                                    className="bs-card"
+                                >
+                                    <div className="bs-card-image">
+                                        <img
+                                            src={
+                                                product.images?.length > 0
+                                                ? product.images[0].image
+                                                : null
+                                            }
+                                            alt={`${product.brand} ${product.model}`}
+                                        />
+                                        <button
+                                            className="bs-wishlist"
+                                            onClick={(e) => {
+                                                e.preventDefault()
+                                                console.log('add to wishlist', product.id)
+                                            }}
+                                        >
+                                            <LuHeart />
+                                        </button>
+                                    </div>
+                                    <div className="bs-card-info">
+                                        <p className="bs-card-name">{product.brand} {product.model}</p>
+                                        <div className="bs-card-bottom">
+                                            <span
+                                                className="bs-colour-dot"
+                                                style={{ backgroundColor: product.colour }}
+                                            />
+                                            <span className="bs-price">£{product.price}</span>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
+                    <button className="bs-scroll-btn bs-scroll-right" onClick={() => scroll('right')}>
+                        <MdChevronRight />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+)
+}
+
+export default BestSellers

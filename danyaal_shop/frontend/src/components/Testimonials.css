@@ -1,0 +1,179 @@
+.testimonials {
+    margin: 100px 0;
+}
+
+.t-banner {
+    background-color: var(--gray);
+    padding: 60px 40px;
+    border-radius: 3px;
+    margin: 0;
+}
+
+.t-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.t-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.t-scroll-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.t-scroll-btn {
+    background-color: var(--white);
+    border: 0.5px solid #e0e0e0;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 26px;
+    color: var(--black);
+}
+
+.t-scroll-btn:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+}
+
+.t-scroll-wrapper {
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+}
+
+.t-scroll-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.t-cards {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+}
+
+.t-card {
+    background-color: var(--white);
+    border-radius: 3px;
+    width: 280px;
+    min-height: 220px; /* ← add this */
+    flex-shrink: 0;
+    padding: 24px;
+    border: 0.5px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* STARS */
+.t-stars {
+    display: flex;
+    gap: 2px;
+}
+
+.star {
+    font-size: 18px;
+}
+
+.star.filled {
+    color: #f5a623;
+}
+
+.star.empty {
+    color: #d0d0d0;
+}
+
+/* COMMENT */
+.t-comment {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* CUSTOMER */
+.t-customer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.t-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.t-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.t-avatar span {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.t-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .t-banner {
+        padding: 40px 24px;
+    }
+
+    .t-card {
+        width: 240px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .testimonials {
+        margin: 60px 0;
+    }
+
+    .t-banner {
+        padding: 30px 16px;
+    }
+
+    .t-scroll-btn {
+        display: none;
+    }
+
+    .t-card {
+        width: 220px;
+        padding: 16px;
+    }
+
+    .t-comment {
+        font-size: 12px;
+    }
+}
