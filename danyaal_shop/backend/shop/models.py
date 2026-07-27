@@ -181,6 +181,7 @@ class SellYourPhone(models.Model):
     customer_name = models.CharField(max_length=100)
     customer_email = models.EmailField()
     customer_phone = models.CharField(max_length=20)
+    customer_address = models.TextField(blank=True)
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -136,3 +136,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+}
+
+STRIPE_SECRET_KEY = 'sk_test_51TxlZcQTbyHoDNxlbWsjdaAyrERaqAZ9ATYcKukCzDBJVo8uyL7qSaqW13ZrfyhD2YmN725FuwYaDaMWyGYdAc3Y00Ap77Z7mn'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51TxlZcQTbyHoDNxlLGnetxlGiMexGx2gcSXQ7h8x5rX0Bajw6Q4mKM0CLEfzeN2jsgMO44TQIkPYM6eXOTHLljY300bNLlLJmC'
+STRIPE_WEBHOOK_SECRET = ''  # leave empty for now

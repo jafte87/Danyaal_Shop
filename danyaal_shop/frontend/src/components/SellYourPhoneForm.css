@@ -1,0 +1,239 @@
+.syp-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+.syp-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 10px;
+}
+
+.syp-subtitle {
+    font-size: 14px;
+    color: var(--text-gray);
+    margin-bottom: 40px;
+}
+
+/* SECTIONS */
+.syp-section {
+    margin-bottom: 40px;
+}
+
+.syp-section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid #e0e0e0;
+}
+
+/* GRID */
+.syp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.syp-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.syp-field-full {
+    grid-column: 1 / -1;
+}
+
+.syp-field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.syp-field input,
+.syp-field select,
+.syp-field textarea {
+    padding: 10px 14px;
+    border: 0.5px solid #e0e0e0;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    color: var(--black);
+    background-color: var(--white);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.syp-field input:focus,
+.syp-field select:focus,
+.syp-field textarea:focus {
+    border-color: var(--blue);
+}
+
+.syp-field input::placeholder,
+.syp-field textarea::placeholder {
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+.syp-field textarea {
+    resize: vertical;
+}
+
+/* DROPZONE */
+.syp-dropzone {
+    border: 1.5px dashed #d0d0d0;
+    border-radius: 3px;
+    padding: 100px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: var(--gray);
+}
+
+.syp-dropzone:hover,
+.syp-dropzone.dragging {
+    border-color: var(--blue);
+    background-color: rgba(0, 87, 255, 0.04);
+}
+
+.syp-dropzone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.syp-drop-icon {
+    font-size: 36px;
+}
+
+.syp-drop-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+}
+
+.syp-drop-hint {
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+/* PREVIEWS */
+.syp-previews {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.syp-preview {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 0.5px solid #e0e0e0;
+}
+
+.syp-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.syp-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: rgba(0,0,0,0.6);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.syp-remove:hover {
+    background-color: #ef4444;
+}
+
+/* SUBMIT */
+.syp-submit {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--black);
+    color: var(--white);
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.syp-submit:hover {
+    background-color: var(--blue);
+}
+
+.syp-submit:disabled {
+    background-color: #d0d0d0;
+    cursor: not-allowed;
+}
+
+/* SUCCESS */
+.syp-success {
+    text-align: center;
+    padding: 80px 40px;
+    border: 0.5px solid #e0e0e0;
+    border-radius: 3px;
+}
+
+.syp-success h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #22c55e;
+    margin-bottom: 12px;
+}
+
+.syp-success p {
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .syp-container {
+        padding: 40px 24px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .syp-container {
+        padding: 30px 16px;
+    }
+
+    .syp-title {
+        font-size: 22px;
+    }
+
+    .syp-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .syp-dropzone {
+        padding: 80px 16px;
+    }
+}

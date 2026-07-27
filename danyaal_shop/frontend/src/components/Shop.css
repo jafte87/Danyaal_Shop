@@ -1,6 +1,6 @@
 .shop-container {
     display: flex;
-    gap: 0;
+    gap: 24px;
     padding: 40px;
     align-items: flex-start;
 }
@@ -28,8 +28,46 @@
 
 .shop-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.shop-load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.shop-load-more button {
+    background-color: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 12px 40px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.shop-load-more button:hover {
+    background-color: var(--blue);
+}
+
+.shop-no-results {
+    text-align: center;
+    padding: 80px 0;
+    color: var(--text-gray);
+}
+
+.shop-no-results p:first-child {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 8px;
+}
+
+.shop-no-results p:last-child {
+    font-size: 13px;
 }
 
 @media (max-width: 1024px) {
@@ -38,7 +76,7 @@
     }
 
     .shop-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 

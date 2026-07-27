@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom'
 import { LuHeart } from 'react-icons/lu'
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useWishlist } from '../hooks/useWishlist'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import './BestSellers.css'
 
 function BestSellers({ products }) {
     const scrollRef = useRef(null)
-
+    const navigate = useNavigate()
+    const { toggleWishlist, isInWishlist } = useWishlist()
     const scroll = (direction) => {
     if (direction === 'left') {
         scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' })
@@ -53,11 +56,14 @@ function BestSellers({ products }) {
                                         <button
                                             className="bs-wishlist"
                                             onClick={(e) => {
-                                                e.preventDefault()
-                                                console.log('add to wishlist', product.id)
+                                            e.preventDefault()
+                                            toggleWishlist(product.id, navigate)
                                             }}
-                                        >
-                                            <LuHeart />
+                                            >
+                                            <LuHeart style={{ 
+                                            fill: isInWishlist(product.id) ? 'var(--blue)' : 'none',
+                                            color: isInWishlist(product.id) ? 'var(--blue)' : 'currentColor'
+                                            }} />
                                         </button>
                                     </div>
                                     <div className="bs-card-info">

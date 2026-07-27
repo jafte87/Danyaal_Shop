@@ -7,8 +7,20 @@ from .models import (
     SellYourPhoneImage, Newsletter, Banner
 )
 
+class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+    extra = 3  # shows 3 empty image slots by default
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    exclude = ['slug']
+    inlines = [ProductImageInline]
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    exclude = ['slug']
+
 admin.site.register(User, UserAdmin)
-admin.site.register(ProductImage)
 admin.site.register(ShippingOption)
 admin.site.register(Discount)
 admin.site.register(Order)
@@ -19,11 +31,3 @@ admin.site.register(SellYourPhone)
 admin.site.register(SellYourPhoneImage)
 admin.site.register(Newsletter)
 admin.site.register(Banner)
-
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    exclude = ['slug']
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    exclude = ['slug']

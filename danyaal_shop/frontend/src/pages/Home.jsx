@@ -18,20 +18,20 @@ function Home() {
         // Best Sellers
         fetch('http://127.0.0.1:8000/api/products/?is_best_seller=true')
             .then(res => res.json())
-            .then(data => setBestSellers(data))
+            .then(data => setBestSellers(data.results || data))
             .catch(err => console.error(err))
 
         // New Arrivals
         fetch('http://127.0.0.1:8000/api/products/?is_new_arrival=true')
             .then(res => res.json())
-            .then(data => setNewArrivals(data))
+            .then(data => setNewArrivals(data.results || data))
             .catch(err => console.error(err))
 
         // Featured Products
         fetch('http://127.0.0.1:8000/api/products/?is_featured=true')
             .then(res => res.json())
             .then(data => {
-                setFeaturedProducts(data)
+                setFeaturedProducts(data.results || data)
                 setLoading(false)
             })
             .catch(err => {

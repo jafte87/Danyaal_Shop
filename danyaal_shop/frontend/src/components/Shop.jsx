@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Filters from '../components/Filters'
@@ -10,6 +11,11 @@ function Shop() {
     const [filters, setFilters] = useState({})
     const [filtersOpen, setFiltersOpen] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [page, setPage] = useState(1)
+    const [hasMore, setHasMore] = useState(true)
+    const [searchParams] = useSearchParams()
+    const PAGE_SIZE = 12
+
 
     useEffect(() => {
         const params = new URLSearchParams()
@@ -23,11 +29,23 @@ function Shop() {
         fetch(`http://127.0.0.1:8000/api/products/?${params.toString()}`)
             .then(res => res.json())
             .then(data => {
-                setProducts(data)
-                setLoading(false)
+                if (page === 1) {
+                setProducts(data.results)
+            } else {
+                setProducts(prev => [...prev, ...data.results])
+            }
+            setHasMore(data.next !== null)
+            setLoading(false)
             })
             .catch(err => console.error(err))
-    }, [filters])
+    }, [filters, page])
+
+    useEffect(() => {
+        const searchFromUrl = searchParams.get('search')
+        if (searchFromUrl) {
+            setFilters(prev => ({ ...prev, search: searchFromUrl }))
+        }
+    }, [])
 
     return (
         <div>

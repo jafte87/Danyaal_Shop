@@ -270,6 +270,109 @@
     color: white;
 }
 
+.search-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border: 0.5px solid #e0e0e0;
+    border-radius: 3px;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.search-result {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    text-decoration: none;
+    color: var(--black);
+    transition: background-color 0.2s ease;
+    border-bottom: 0.5px solid #f0f0f0;
+}
+
+.search-result:hover {
+    background-color: var(--gray);
+}
+
+.search-result-image {
+    width: 44px;
+    height: 44px;
+    background-color: #fafafa;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 0.5px solid #e0e0e0;
+}
+
+.search-result-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 4px;
+}
+
+.search-result-info {
+    flex: 1;
+}
+
+.search-result-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.search-result-specs {
+    font-size: 11px;
+    color: var(--text-gray);
+    margin-top: 2px;
+}
+
+.search-result-price {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--blue);
+    flex-shrink: 0;
+}
+
+.search-see-all {
+    display: block;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+    text-align: center;
+    background-color: var(--gray);
+    transition: background-color 0.2s ease;
+}
+
+.search-see-all:hover {
+    background-color: #e8e8e8;
+}
+
+.mobile-search-bar {
+    position: relative;
+}
+
+.mobile-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+}
+
+.search-no-results {
+    padding: 16px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-gray);
+}
+
 /* RESPONSIVE */
 /* TABLET - iPad (768px - 1024px) */
 @media (max-width: 1024px) and (min-width: 769px) {

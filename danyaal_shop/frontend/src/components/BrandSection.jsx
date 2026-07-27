@@ -1,12 +1,15 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { LuHeart } from 'react-icons/lu'
+import { useNavigate } from 'react-router-dom'
+import { useWishlist } from '../hooks/useWishlist'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import './BrandSection.css'
 
 function BrandSection({ title, products, seeAllLink }) {
     const scrollRef = useRef(null)
-
+    const navigate = useNavigate()
+    const { toggleWishlist, isInWishlist } = useWishlist()
     const scroll = (direction) => {
         scrollRef.current.scrollBy({
             left: direction === 'left' ? -300 : 300,
@@ -47,13 +50,16 @@ function BrandSection({ title, products, seeAllLink }) {
                                             alt={`${product.brand} ${product.model}`}
                                         />
                                         <button
-                                            className="brand-wishlist"
+                                            className="bs-wishlist"
                                             onClick={(e) => {
-                                                e.preventDefault()
-                                                console.log('add to wishlist', product.id)
+                                            e.preventDefault()
+                                            toggleWishlist(product.id, navigate)
                                             }}
-                                        >
-                                            <LuHeart />
+                                            >
+                                            <LuHeart style={{ 
+                                            fill: isInWishlist(product.id) ? 'var(--blue)' : 'none',
+                                            color: isInWishlist(product.id) ? 'var(--blue)' : 'currentColor'
+                                            }} />
                                         </button>
                                     </div>
                                     <div className="brand-card-info">

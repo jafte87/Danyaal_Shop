@@ -8,6 +8,11 @@ import AboutUs from './pages/AboutUs'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import WarrantyInformation from './pages/WarrantyInformation'
 import TermsConditions from './pages/Terms&Conditions'
+import Cart from './pages/Cart'
+import Account from './pages/Account'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import OrderSuccess from './pages/OrderSuccess'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
@@ -19,6 +24,11 @@ function App() {
             <Route path="/product/:slug" element={<ProductPage />} />
             <Route path="/returns-refund-policy" element={<ReturnsRefundPolicy />} />
             <Route path="/sell-your-phone" element={<SellYourPhone />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/order/success" element={<OrderSuccess />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

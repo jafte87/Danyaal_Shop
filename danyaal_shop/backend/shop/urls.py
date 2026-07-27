@@ -42,5 +42,9 @@ urlpatterns = [
 
     # Banners
     path('banners/', views.BannerListView.as_view(), name='banner-list'),
+    
+    path('auth/delete/', views.DeleteAccountView.as_view(), name='delete-account'),
+
+    path('checkout/create-session/', views.CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
 
 ]
