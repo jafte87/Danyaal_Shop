@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { LuTrash2 } from 'react-icons/lu'
 import './CartContent.css'
+import { API_BASE_URL } from '..\config'
 
 function CartContent() {
     const { cartItems, updateQuantity, removeFromCart, clearCart, totalPrice } = useCart()
@@ -14,7 +15,7 @@ function CartContent() {
     const [checkoutLoading, setCheckoutLoading] = useState(false)
 
     useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/shipping/')
+    fetch(${API_BASE_URL}/api/shipping/')
         .then(res => res.json())
         .then(data => setShippingOptions(data))
         .catch(err => console.error(err))
@@ -27,7 +28,7 @@ function CartContent() {
         }
         setCheckoutLoading(true)
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/checkout/create-session/', {
+            const res = await fetch(${API_BASE_URL}/api/checkout/create-session/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -61,7 +62,7 @@ function CartContent() {
     const validateDiscount = async () => {
         setDiscountError('')
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/discount/validate/', {
+            const res = await fetch(${API_BASE_URL}/api/discount/validate/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ code: discountCode })

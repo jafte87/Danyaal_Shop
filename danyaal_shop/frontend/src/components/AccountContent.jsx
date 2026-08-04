@@ -6,8 +6,9 @@ import { useWishlist } from '../hooks/useWishlist'
 import { authFetch } from '../services/api'
 import { LuPackage, LuHeart, LuUser, LuLogOut } from 'react-icons/lu'
 import './AccountContent.css'
+import { API_BASE_URL } from '..\config'
 
-const BASE_URL = 'http://127.0.0.1:8000/api'
+const BASE_URL = ${API_BASE_URL}/api'
 
 function AccountContent() {
     const { user, logout, token, login } = useAuth()

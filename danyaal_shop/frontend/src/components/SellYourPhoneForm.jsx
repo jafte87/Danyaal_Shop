@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Banner from '../components/Banner'
 import './SellYourPhoneForm.css'
+import { API_BASE_URL } from '..\config'
 
 function SellYourPhone() {
     const [formData, setFormData] = useState({
@@ -58,7 +59,7 @@ function SellYourPhone() {
         images.forEach(img => data.append('images', img))
 
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/sell/', {
+            const res = await fetch(${API_BASE_URL}/api/sell/', {
                 method: 'POST',
                 body: data,
             })

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useEffect } from 'react'
 import '../components/OrderSuccess.css'
+import { API_BASE_URL } from '..\config'
 
 function OrderSuccess() {
     const { clearCart } = useCart()
@@ -15,7 +16,7 @@ function OrderSuccess() {
             const headers = { 'Content-Type': 'application/json' }
             if (token) headers['Authorization'] = `Bearer ${token}`
 
-            fetch('http://127.0.0.1:8000/api/orders/create-from-session/', {
+            fetch(${API_BASE_URL}/api/orders/create-from-session/', {
                 method: 'POST',
                 headers,
                 body: JSON.stringify({ session_id: sessionId })

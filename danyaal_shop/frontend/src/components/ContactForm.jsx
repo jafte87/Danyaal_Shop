@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './ContactForm.css'
+import { API_BASE_URL } from '..\config'
 
 function ContactForm() {
     const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ function ContactForm() {
     e.preventDefault()
     setLoading(true)
     try {
-        const res = await fetch('http://127.0.0.1:8000/api/contact/', {
+        const res = await fetch(${API_BASE_URL}/api/contact/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -41,7 +42,7 @@ function ContactForm() {
     const [contactInfo, setContactInfo] = useState(null)
 
     useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/contact-info/')
+    fetch(${API_BASE_URL}/api/contact-info/')
         .then(res => res.json())
         .then(data => {
             if (data.length > 0) setContactInfo(data[0])

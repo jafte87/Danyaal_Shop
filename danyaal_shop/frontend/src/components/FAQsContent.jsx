@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './FAQsContent.css'
+import { API_BASE_URL } from '..\config'
 
 function FAQsContent() {
     const [faqs, setFaqs] = useState([])
@@ -7,7 +8,7 @@ function FAQsContent() {
     const [openId, setOpenId] = useState(null)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/faqs/')
+        fetch(${API_BASE_URL}/api/faqs/')
             .then(res => res.json())
             .then(data => {
                 setFaqs(data)

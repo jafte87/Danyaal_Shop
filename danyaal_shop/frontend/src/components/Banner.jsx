@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './Banner.css'
+import { API_BASE_URL } from '..\config'
 
 function Banner({ page = 'home' }) {
     const [banner, setBanner] = useState(null)

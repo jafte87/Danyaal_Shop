@@ -8,6 +8,7 @@ import Filters from '../components/Filters'
 import ShopCard from '../components/ShopCard'
 import { Helmet } from 'react-helmet-async'
 import '../components/Shop.css'
+import { API_BASE_URL } from '..\config'
 
 function Shop() {
     const [searchParams] = useSearchParams()

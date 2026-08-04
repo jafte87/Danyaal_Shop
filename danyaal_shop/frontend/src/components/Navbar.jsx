@@ -8,6 +8,7 @@ import { LuHeart } from "react-icons/lu"
 import { MdMenu, MdClose } from "react-icons/md"
 import { IoSearchOutline } from "react-icons/io5"
 import './Navbar.css'
+import { API_BASE_URL } from '..\config'
 
 function Navbar() {
     const { cartItems } = useCart()

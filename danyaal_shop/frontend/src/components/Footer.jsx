@@ -4,6 +4,7 @@ import { FaTiktok, FaWhatsapp } from 'react-icons/fa'
 import { SiVisa, SiMastercard, SiApplepay, SiGooglepay} from 'react-icons/si'
 import { useState } from 'react'
 import './Footer.css'
+import { API_BASE_URL } from '..\config'
 
 function Footer() {
 
@@ -14,7 +15,7 @@ function Footer() {
     e.preventDefault()
     if (!email) return
     try {
-        const res = await fetch('http://127.0.0.1:8000/api/newsletter/', {
+        const res = await fetch(${API_BASE_URL}/api/newsletter/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })

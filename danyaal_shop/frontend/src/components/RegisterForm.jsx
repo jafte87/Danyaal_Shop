@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './AuthForms.css'
+import { API_BASE_URL } from '..\config'
 
 function RegisterForm() {
     const { login } = useAuth()
@@ -48,7 +49,7 @@ function RegisterForm() {
         setLoading(true)
 
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/auth/register/', {
+            const res = await fetch(${API_BASE_URL}/api/auth/register/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -65,13 +66,13 @@ function RegisterForm() {
             console.log('Register response:', data) 
             if (res.ok) {
                 if (formData.newsletter) {
-                    await fetch('http://127.0.0.1:8000/api/newsletter/', {
+                    await fetch(${API_BASE_URL}/api/newsletter/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: formData.email })
                     })
                     }
-                const loginRes = await fetch('http://127.0.0.1:8000/api/auth/login/', {
+                const loginRes = await fetch(${API_BASE_URL}/api/auth/login/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

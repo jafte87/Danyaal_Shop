@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './Filters.css'
+import { API_BASE_URL } from '..\config'
 
 function Filters({ filters, onChange, isOpen, onClose }) {
     const [options, setOptions] = useState({
@@ -18,7 +19,7 @@ function Filters({ filters, onChange, isOpen, onClose }) {
     })
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/products/filters/')
+        fetch(${API_BASE_URL}/api/products/filters/')
             .then(res => res.json())
             .then(data => setOptions(data))
             .catch(err => console.error(err))

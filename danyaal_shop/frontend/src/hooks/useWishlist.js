@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { authFetch } from '../services/api'
+import { API_BASE_URL } from '..\config'
 
 export const useWishlist = () => {
     const { isAuthenticated } = useAuth()
@@ -11,7 +12,7 @@ export const useWishlist = () => {
             setWishlistIds([])
             return
         }
-        authFetch('http://127.0.0.1:8000/api/wishlist/')
+        authFetch(${API_BASE_URL}/api/wishlist/')
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {

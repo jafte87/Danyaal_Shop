@@ -12,6 +12,7 @@ import Testimonials from '../components/Testimonials'
 import BenefitsBanner from '../components/BenefitsBanner'
 import { Helmet } from 'react-helmet-async'
 import './ProductPage.css'
+import { API_BASE_URL } from '..\config'
 
 function ProductPage() {
     const { slug } = useParams()
@@ -53,13 +54,13 @@ function ProductPage() {
             .catch(err => console.error(err))
 
         // fetch best sellers
-        fetch('http://127.0.0.1:8000/api/products/?is_best_seller=true')
+        fetch(${API_BASE_URL}/api/products/?is_best_seller=true')
             .then(res => res.json())
             .then(data => setBestSellers(data.results || data))
             .catch(err => console.error(err))
 
         // fetch testimonials
-        fetch('http://127.0.0.1:8000/api/testimonials/')
+        fetch(${API_BASE_URL}/api/testimonials/')
             .then(res => res.json())
             .then(data => setTestimonials(data))
             .catch(err => console.error(err))

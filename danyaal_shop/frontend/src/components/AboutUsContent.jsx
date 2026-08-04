@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import './AboutUsContent.css'
+import { API_BASE_URL } from '..\config'
 
 function AboutUsContent() {
     const [about, setAbout] = useState(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/api/about/')
+        fetch(${API_BASE_URL}/api/about/')
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) setAbout(data[0])

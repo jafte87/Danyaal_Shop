@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './AuthForms.css'
+import { API_BASE_URL } from '..\config'
 
 function LoginForm() {
     const { login } = useAuth()
@@ -36,7 +37,7 @@ function LoginForm() {
         setLoading(true)
 
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/auth/login/', {
+            const res = await fetch(${API_BASE_URL}/api/auth/login/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
