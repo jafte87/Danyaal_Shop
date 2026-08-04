@@ -1,0 +1,9 @@
+[build]
+builder = "NIXPACKS"
+buildCommand = "cd danyaal_shop/backend && pip install -r requirements.txt"
+watchPaths = ["/danyaal_shop/backend/**"]
+
+[deploy]
+startCommand = "cd danyaal_shop/backend && gunicorn backend.wsgi:application --log-file -"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
