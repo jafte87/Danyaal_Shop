@@ -8,7 +8,7 @@ import { LuPackage, LuHeart, LuUser, LuLogOut } from 'react-icons/lu'
 import './AccountContent.css'
 import { API_BASE_URL } from '../config'
 
-const BASE_URL = ${API_BASE_URL}/api'
+const BASE_URL = `${API_BASE_URL}/api`
 
 function AccountContent() {
     const { user, logout, token, login } = useAuth()

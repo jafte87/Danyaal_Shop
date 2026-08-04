@@ -18,19 +18,19 @@ function Home() {
 
     useEffect(() => {
         // Best Sellers
-        fetch(${API_BASE_URL}/api/products/?is_best_seller=true')
+        fetch(`${API_BASE_URL}/api/products/?is_best_seller=true`)
             .then(res => res.json())
             .then(data => setBestSellers(data.results || data))
             .catch(err => console.error(err))
 
         // New Arrivals
-        fetch(${API_BASE_URL}/api/products/?is_new_arrival=true')
+        fetch(`${API_BASE_URL}/api/products/?is_new_arrival=true`)
             .then(res => res.json())
             .then(data => setNewArrivals(data.results || data))
             .catch(err => console.error(err))
 
         // Featured Products
-        fetch(${API_BASE_URL}/api/products/?is_featured=true')
+        fetch(`${API_BASE_URL}/api/products/?is_featured=true`)
             .then(res => res.json())
             .then(data => {
                 setFeaturedProducts(data.results || data)
@@ -41,7 +41,7 @@ function Home() {
                 setLoading(false)
             })
 
-        fetch(${API_BASE_URL}/api/testimonials/')
+        fetch(`${API_BASE_URL}/api/testimonials/`)
             .then(res => res.json())
             .then(data => setTestimonials(data))
             .catch(err => console.error(err))

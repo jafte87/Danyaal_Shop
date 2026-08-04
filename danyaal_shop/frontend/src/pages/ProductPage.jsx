@@ -54,13 +54,13 @@ function ProductPage() {
             .catch(err => console.error(err))
 
         // fetch best sellers
-        fetch(${API_BASE_URL}/api/products/?is_best_seller=true')
+        fetch(`${API_BASE_URL}/api/products/?is_best_seller=true`)
             .then(res => res.json())
             .then(data => setBestSellers(data.results || data))
             .catch(err => console.error(err))
 
         // fetch testimonials
-        fetch(${API_BASE_URL}/api/testimonials/')
+        fetch(`${API_BASE_URL}/api/testimonials/`)
             .then(res => res.json())
             .then(data => setTestimonials(data))
             .catch(err => console.error(err))

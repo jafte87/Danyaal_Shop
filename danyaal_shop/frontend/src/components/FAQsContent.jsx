@@ -8,7 +8,7 @@ function FAQsContent() {
     const [openId, setOpenId] = useState(null)
 
     useEffect(() => {
-        fetch(${API_BASE_URL}/api/faqs/')
+        fetch(`${API_BASE_URL}/api/faqs/`)
             .then(res => res.json())
             .then(data => {
                 setFaqs(data)

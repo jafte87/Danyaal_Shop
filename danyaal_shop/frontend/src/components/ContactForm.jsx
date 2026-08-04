@@ -21,7 +21,7 @@ function ContactForm() {
     e.preventDefault()
     setLoading(true)
     try {
-        const res = await fetch(${API_BASE_URL}/api/contact/', {
+        const res = await fetch(`${API_BASE_URL}/api/contact/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -42,7 +42,7 @@ function ContactForm() {
     const [contactInfo, setContactInfo] = useState(null)
 
     useEffect(() => {
-    fetch(${API_BASE_URL}/api/contact-info/')
+    fetch(`${API_BASE_URL}/api/contact-info/`)
         .then(res => res.json())
         .then(data => {
             if (data.length > 0) setContactInfo(data[0])

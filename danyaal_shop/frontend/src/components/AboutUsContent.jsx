@@ -7,7 +7,7 @@ function AboutUsContent() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(${API_BASE_URL}/api/about/')
+        fetch(`${API_BASE_URL}/api/about/`)
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) setAbout(data[0])

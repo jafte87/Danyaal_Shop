@@ -19,7 +19,7 @@ function Filters({ filters, onChange, isOpen, onClose }) {
     })
 
     useEffect(() => {
-        fetch(${API_BASE_URL}/api/products/filters/')
+        fetch(`${API_BASE_URL}/api/products/filters/`)
             .then(res => res.json())
             .then(data => setOptions(data))
             .catch(err => console.error(err))

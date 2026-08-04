@@ -49,7 +49,7 @@ function RegisterForm() {
         setLoading(true)
 
         try {
-            const res = await fetch(${API_BASE_URL}/api/auth/register/', {
+            const res = await fetch(`${API_BASE_URL}/api/auth/register/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -66,13 +66,13 @@ function RegisterForm() {
             console.log('Register response:', data) 
             if (res.ok) {
                 if (formData.newsletter) {
-                    await fetch(${API_BASE_URL}/api/newsletter/', {
+                    await fetch(`${API_BASE_URL}/api/newsletter/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: formData.email })
                     })
                     }
-                const loginRes = await fetch(${API_BASE_URL}/api/auth/login/', {
+                const loginRes = await fetch(`${API_BASE_URL}/api/auth/login/`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

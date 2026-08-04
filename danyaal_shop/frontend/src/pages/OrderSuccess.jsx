@@ -16,7 +16,7 @@ function OrderSuccess() {
             const headers = { 'Content-Type': 'application/json' }
             if (token) headers['Authorization'] = `Bearer ${token}`
 
-            fetch(${API_BASE_URL}/api/orders/create-from-session/', {
+            fetch(`${API_BASE_URL}/api/orders/create-from-session/`, {
                 method: 'POST',
                 headers,
                 body: JSON.stringify({ session_id: sessionId })

@@ -15,7 +15,7 @@ function CartContent() {
     const [checkoutLoading, setCheckoutLoading] = useState(false)
 
     useEffect(() => {
-    fetch(${API_BASE_URL}/api/shipping/')
+    fetch(`${API_BASE_URL}/api/shipping/`)
         .then(res => res.json())
         .then(data => setShippingOptions(data))
         .catch(err => console.error(err))
@@ -28,7 +28,7 @@ function CartContent() {
         }
         setCheckoutLoading(true)
         try {
-            const res = await fetch(${API_BASE_URL}/api/checkout/create-session/', {
+            const res = await fetch(`${API_BASE_URL}/api/checkout/create-session/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -62,7 +62,7 @@ function CartContent() {
     const validateDiscount = async () => {
         setDiscountError('')
         try {
-            const res = await fetch(${API_BASE_URL}/api/discount/validate/', {
+            const res = await fetch(`${API_BASE_URL}/api/discount/validate/`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ code: discountCode })

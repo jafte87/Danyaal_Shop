@@ -59,7 +59,7 @@ function SellYourPhone() {
         images.forEach(img => data.append('images', img))
 
         try {
-            const res = await fetch(${API_BASE_URL}/api/sell/', {
+            const res = await fetch(`${API_BASE_URL}/api/sell/`, {
                 method: 'POST',
                 body: data,
             })
