@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import './Banner.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function Banner({ page = 'home' }) {
     const [banner, setBanner] = useState(null)
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/banners/?page=${page}`)
+        fetch(`${API_BASE_URL}/api/banners/?page=${page}`)
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) setBanner(data[0])

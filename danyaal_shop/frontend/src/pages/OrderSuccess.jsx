@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useEffect } from 'react'
 import '../components/OrderSuccess.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function OrderSuccess() {
     const { clearCart } = useCart()

@@ -4,7 +4,7 @@ import { FaTiktok, FaWhatsapp } from 'react-icons/fa'
 import { SiVisa, SiMastercard, SiApplepay, SiGooglepay} from 'react-icons/si'
 import { useState } from 'react'
 import './Footer.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function Footer() {
 

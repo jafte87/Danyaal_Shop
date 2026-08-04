@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import './AuthForms.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function LoginForm() {
     const { login } = useAuth()

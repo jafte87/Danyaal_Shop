@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { LuTrash2 } from 'react-icons/lu'
 import './CartContent.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function CartContent() {
     const { cartItems, updateQuantity, removeFromCart, clearCart, totalPrice } = useCart()

@@ -12,7 +12,7 @@ import Testimonials from '../components/Testimonials'
 import BenefitsBanner from '../components/BenefitsBanner'
 import { Helmet } from 'react-helmet-async'
 import './ProductPage.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function ProductPage() {
     const { slug } = useParams()

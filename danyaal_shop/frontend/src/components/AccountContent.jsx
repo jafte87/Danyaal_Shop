@@ -6,7 +6,7 @@ import { useWishlist } from '../hooks/useWishlist'
 import { authFetch } from '../services/api'
 import { LuPackage, LuHeart, LuUser, LuLogOut } from 'react-icons/lu'
 import './AccountContent.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 const BASE_URL = ${API_BASE_URL}/api'
 

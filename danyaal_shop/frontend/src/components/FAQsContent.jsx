@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './FAQsContent.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function FAQsContent() {
     const [faqs, setFaqs] = useState([])

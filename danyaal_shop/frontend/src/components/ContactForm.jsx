@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './ContactForm.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function ContactForm() {
     const [formData, setFormData] = useState({

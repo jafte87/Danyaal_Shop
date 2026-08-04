@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './PolicyContent.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function PolicyContent({ page }) {
     const [policy, setPolicy] = useState(null)

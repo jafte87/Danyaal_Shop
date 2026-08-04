@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { authFetch } from '../services/api'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 export const useWishlist = () => {
     const { isAuthenticated } = useAuth()
@@ -12,7 +12,7 @@ export const useWishlist = () => {
             setWishlistIds([])
             return
         }
-        authFetch(${API_BASE_URL}/api/wishlist/')
+        authFetch(`${API_BASE_URL}/api/wishlist/`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -29,7 +29,7 @@ export const useWishlist = () => {
             return
         }
         try {
-            const res = await authFetch(`http://127.0.0.1:8000/api/wishlist/${productId}/`, {
+            const res = await authFetch(`${API_BASE_URL}/api/wishlist/${productId}/`, {
                 method: 'POST',
             })
             const data = await res.json()

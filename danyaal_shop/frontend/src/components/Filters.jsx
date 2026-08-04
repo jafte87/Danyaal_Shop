@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './Filters.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function Filters({ filters, onChange, isOpen, onClose }) {
     const [options, setOptions] = useState({

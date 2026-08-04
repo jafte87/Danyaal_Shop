@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import Filters from '../components/Filters'
 import Banner from '../components/Banner'
 import './Shop.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function Shop() {
     const [products, setProducts] = useState([])

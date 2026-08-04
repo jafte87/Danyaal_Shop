@@ -7,7 +7,7 @@ import Testimonials from '../components/Testimonials'
 import Footer from '../components/Footer'
 import { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function Home() {
     const [bestSellers, setBestSellers] = useState([])

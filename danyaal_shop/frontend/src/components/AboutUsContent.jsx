@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './AboutUsContent.css'
-import { API_BASE_URL } from '..\config'
+import { API_BASE_URL } from '../config'
 
 function AboutUsContent() {
     const [about, setAbout] = useState(null)
