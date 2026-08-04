@@ -6,7 +6,7 @@ function Banner({ page = 'home' }) {
     const [banner, setBanner] = useState(null)
 
     useEffect(() => {
-        fetch(``${API_BASE_URL}/api/banners/?page=${page}`)
+        fetch(`${API_BASE_URL}/api/banners/?page=${page}`)
             .then(res => res.json())
             .then(data => {
                 if (data.length > 0) setBanner(data[0])
@@ -16,7 +16,7 @@ function Banner({ page = 'home' }) {
 
     if (!banner) {
         return (
-            <div className=`banner-placeholder">
+            <div className="banner-placeholder">
                 <p>{page} banner</p>
             </div>
         )

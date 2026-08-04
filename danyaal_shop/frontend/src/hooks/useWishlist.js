@@ -12,7 +12,7 @@ export const useWishlist = () => {
             setWishlistIds([])
             return
         }
-        authFetch(``${API_BASE_URL}/api/wishlist/`)
+        authFetch(`${API_BASE_URL}/api/wishlist/`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -25,12 +25,12 @@ export const useWishlist = () => {
 
     const toggleWishlist = async (productId, navigate) => {
         if (!isAuthenticated) {
-            navigate(`/login')
+            navigate('/login')
             return
         }
         try {
-            const res = await authFetch(``${API_BASE_URL}/api/wishlist/${productId}/`, {
-                method: `POST',
+            const res = await authFetch(`${API_BASE_URL}/api/wishlist/${productId}/`, {
+                method: 'POST',
             })
             const data = await res.json()
             if (data.status === 'added') {

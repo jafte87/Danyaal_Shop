@@ -13,7 +13,7 @@ function Footer() {
     const [social, setSocial] = useState({})
 
     useEffect(() => {
-        fetch(``${API_BASE_URL}/api/social-links/`)
+        fetch(`${API_BASE_URL}/api/social-links/`)
             .then(res => res.json())
             .then(data => setSocial(data))
             .catch(err => console.error(err))
@@ -24,7 +24,7 @@ function Footer() {
         if (!email) return
         try {
             const res = await fetch(`${API_BASE_URL}/api/newsletter/`, {
-                method: `POST',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
             })
