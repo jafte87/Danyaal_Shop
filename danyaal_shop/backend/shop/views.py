@@ -15,14 +15,14 @@ from .models import (
     Category, Product, ShippingOption,
     Discount, Order, OrderItem, Wishlist,
     Testimonial, SellYourPhone, Newsletter, Banner,
-    ContactInfo, ContactSubmission, FAQ, PolicyPage
+    ContactInfo, ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
 from .serializers import (
     CategorySerializer, ProductSerializer, UserSerializer,
     OrderSerializer, OrderItemSerializer, ShippingOptionSerializer,
     DiscountSerializer, WishlistSerializer, TestimonialSerializer,
     SellYourPhoneSerializer, NewsletterSerializer, BannerSerializer, ContactInfoSerializer,
-    ContactSubmissionSerializer, FAQSerializer, PolicyPageSerializer
+    ContactSubmissionSerializer, FAQSerializer, PolicyPageSerializer, SocialLinksSerializer
 )
 from django.db.models import Count
 from rest_framework.pagination import PageNumberPagination
@@ -666,3 +666,13 @@ class StripeWebhookView(APIView):
         except Exception as e:
             print('WEBHOOK ERROR:', str(e))
 
+
+class SocialLinksView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        obj = SocialLinks.objects.first()
+        if not obj:
+            return Response({'instagram': '', 'facebook': '', 'tiktok': '', 'whatsapp': '', 'x_twitter': '', 'youtube': ''})
+        serializer = SocialLinksSerializer(obj)
+        return Response(serializer.data)

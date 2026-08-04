@@ -6,7 +6,7 @@ from .models import (
     ShippingOption, Discount, Order, OrderItem,
     Wishlist, Testimonial, SellYourPhone,
     SellYourPhoneImage, Newsletter, Banner, ContactInfo,
-    AboutUs, ContactSubmission, FAQ, PolicyPage
+    AboutUs, ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
 
 
@@ -139,3 +139,17 @@ class CustomUserAdmin(UnfoldModelAdmin, UserAdmin):
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Wishlist)
 admin.site.register(SellYourPhoneImage)
+
+
+@admin.register(SocialLinks)
+class SocialLinksAdmin(UnfoldModelAdmin):
+    fieldsets = [
+        ('Social Media Links', {'fields': ['instagram', 'facebook', 'tiktok', 'whatsapp', 'x_twitter', 'youtube']}),
+    ]
+
+    def has_add_permission(self, request):
+        # Only allow one record
+        return not SocialLinks.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False

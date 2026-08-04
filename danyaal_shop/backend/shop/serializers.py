@@ -5,7 +5,7 @@ from .models import (
     Discount, Wishlist, Testimonial,
     SellYourPhone, SellYourPhoneImage,
     Newsletter, Banner, AboutUs, ContactInfo,
-    ContactSubmission, FAQ, PolicyPage
+    ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
 
 
@@ -155,4 +155,9 @@ class FAQSerializer(serializers.ModelSerializer):
 class PolicyPageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PolicyPage
-        fields = ['title', 'content', 'updated_at']
+        fields = '__all__'
+
+class SocialLinksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialLinks
+        fields = ['instagram', 'facebook', 'tiktok', 'whatsapp', 'x_twitter', 'youtube']

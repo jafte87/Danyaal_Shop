@@ -1,30 +1,39 @@
 import { Link } from 'react-router-dom'
 import { FiInstagram, FiFacebook } from 'react-icons/fi'
-import { FaTiktok, FaWhatsapp } from 'react-icons/fa'
+import { FaTiktok, FaWhatsapp, FaYoutube } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 import { SiVisa, SiMastercard, SiApplepay, SiGooglepay} from 'react-icons/si'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Footer.css'
 import { API_BASE_URL } from '../config'
 
 function Footer() {
-
     const [email, setEmail] = useState('')
     const [subscribed, setSubscribed] = useState(false)
+    const [social, setSocial] = useState({})
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/social-links/`)
+            .then(res => res.json())
+            .then(data => setSocial(data))
+            .catch(err => console.error(err))
+    }, [])
 
     const handleNewsletter = async (e) => {
-    e.preventDefault()
-    if (!email) return
-    try {
-        const res = await fetch(${API_BASE_URL}/api/newsletter/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        })
-        if (res.ok) setSubscribed(true)
-            } catch (err) {
+        e.preventDefault()
+        if (!email) return
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/newsletter/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            })
+            if (res.ok) setSubscribed(true)
+        } catch (err) {
             console.error(err)
-            }
+        }
     }
+
     return (
         <footer className="footer">
             <div className="footer-top">
@@ -50,6 +59,7 @@ function Footer() {
                 </form>
                 )}
                 </div>
+
                 {/* LOGO + DESCRIPTION */}
                 <div className="footer-brand">
                     <div className="footer-logo">
@@ -59,12 +69,14 @@ function Footer() {
                         Premium refurbished phones at unbeatable prices. 
                         Every device tested, certified and warranted.
                     </p>
-                    {/* SOCIAL */}
+                    {/* SOCIAL — only render icons that have a URL */}
                     <div className="footer-social">
-                        <a href="" target="_blank" rel="noreferrer"><FiInstagram /></a>
-                        <a href="" target="_blank" rel="noreferrer"><FiFacebook /></a>
-                        <a href="" target="_blank" rel="noreferrer"><FaTiktok /></a>
-                        <a href="" target="_blank" rel="noreferrer"><FaWhatsapp /></a>
+                        {social.instagram && <a href={social.instagram} target="_blank" rel="noreferrer"><FiInstagram /></a>}
+                        {social.facebook && <a href={social.facebook} target="_blank" rel="noreferrer"><FiFacebook /></a>}
+                        {social.tiktok && <a href={social.tiktok} target="_blank" rel="noreferrer"><FaTiktok /></a>}
+                        {social.whatsapp && <a href={social.whatsapp} target="_blank" rel="noreferrer"><FaWhatsapp /></a>}
+                        {social.x_twitter && <a href={social.x_twitter} target="_blank" rel="noreferrer"><FaXTwitter /></a>}
+                        {social.youtube && <a href={social.youtube} target="_blank" rel="noreferrer"><FaYoutube /></a>}
                     </div>
                 </div>
 
@@ -115,7 +127,7 @@ function Footer() {
 
             {/* BOTTOM BAR */}
             <div className="footer-bottom">
-                <p className="footer-copy">© 2026 Your Brand. All rights reserved.</p>
+                <p className="footer-copy">© 2026 Danyaal Shop. All rights reserved.</p>
 
                 {/* PAYMENT METHODS */}
                 <div className="footer-payments">

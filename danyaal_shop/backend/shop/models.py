@@ -287,3 +287,19 @@ class PolicyPage(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class SocialLinks(models.Model):
+    instagram = models.URLField(blank=True)
+    facebook = models.URLField(blank=True)
+    tiktok = models.URLField(blank=True)
+    whatsapp = models.URLField(blank=True)
+    x_twitter = models.URLField(blank=True, verbose_name='X (Twitter)')
+    youtube = models.URLField(blank=True)
+
+    def __str__(self):
+        return 'Social Media Links'
+
+    class Meta:
+        verbose_name = 'Social Media Links'
+        verbose_name_plural = 'Social Media Links'

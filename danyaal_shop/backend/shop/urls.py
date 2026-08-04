@@ -60,5 +60,6 @@ urlpatterns = [
 
     path('webhook/', views.StripeWebhookView.as_view(), name='stripe-webhook'),
 
+    path('social-links/', views.SocialLinksView.as_view(), name='social-links'),
 
 ]
