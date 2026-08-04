@@ -73,7 +73,7 @@ def robots_txt(request):
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('portal/', admin.site.urls),
     path('api/', include('shop.urls')),
     path('sitemap.xml', sitemap_xml, name='sitemap'),
     path('robots.txt', robots_txt, name='robots-txt'),
