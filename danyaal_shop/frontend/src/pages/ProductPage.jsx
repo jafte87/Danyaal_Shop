@@ -10,6 +10,7 @@ import Footer from '../components/Footer'
 import BestSellers from '../components/BestSellers'
 import Testimonials from '../components/Testimonials'
 import BenefitsBanner from '../components/BenefitsBanner'
+import { Helmet } from 'react-helmet-async'
 import './ProductPage.css'
 
 function ProductPage() {
@@ -21,6 +22,7 @@ function ProductPage() {
     const [bestSellers, setBestSellers] = useState([])
     const [testimonials, setTestimonials] = useState([])
     const [added, setAdded] = useState(false)
+    const [quantity, setQuantity] = useState(1)
     const navigate = useNavigate()
     const { toggleWishlist, isInWishlist } = useWishlist()
     const nextImage = () => {
@@ -64,7 +66,7 @@ function ProductPage() {
     }, [slug])
 
     const handleAddToCart = () => {
-        addToCart(product)
+        addToCart(product, quantity)
         setAdded(true)
         setTimeout(() => setAdded(false), 2000)
     }
@@ -87,6 +89,20 @@ function ProductPage() {
 
     return (
         <div>
+            <Helmet>
+                <title>
+                    {product.meta_title
+                        || `${product.brand} ${product.model} ${product.storage} ${product.colour} — ${product.condition} | Danyaal Shop`
+                    }
+                </title>
+                <meta
+                    name="description"
+                    content={
+                        product.meta_description
+                        || `Buy a ${product.condition} ${product.brand} ${product.model} (${product.storage}, ${product.colour}) for £${product.price} at Danyaal Shop. ${product.network_status ? `Network: ${product.network_status}.` : ''} Comes with warranty, fast UK delivery.`
+                    }
+                />
+            </Helmet>
             <Navbar />
 
             {/* PRODUCT SECTION */}
@@ -214,6 +230,20 @@ function ProductPage() {
 
                     {/* ACTIONS */}
                     <div className="pp-actions">
+                        {/* QUANTITY STEPPER */}
+                        <div className="pp-quantity">
+                            <button
+                                className="pp-qty-btn"
+                                onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                                type="button"
+                            >−</button>
+                            <span className="pp-qty-value">{quantity}</span>
+                            <button
+                                className="pp-qty-btn"
+                                onClick={() => setQuantity(q => q + 1)}
+                                type="button"
+                            >+</button>
+                        </div>
                         <button
                             className={`pp-add-cart ${added ? 'added' : ''}`}
                             onClick={handleAddToCart}

@@ -218,6 +218,39 @@
     margin-top: 24px;
 }
 
+.pp-quantity {
+    display: flex;
+    align-items: center;
+    border: 0.5px solid #e0e0e0;
+    background-color: var(--white);
+}
+
+.pp-qty-btn {
+    width: 40px;
+    height: 48px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    transition: background-color 0.2s ease;
+}
+
+.pp-qty-btn:hover {
+    background-color: var(--gray);
+}
+
+.pp-qty-value {
+    width: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--black);
+}
+
 .pp-add-cart {
     flex: 1;
     padding: 14px;

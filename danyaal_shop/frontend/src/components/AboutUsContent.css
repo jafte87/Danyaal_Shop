@@ -1,0 +1,178 @@
+.about-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    font-size: 14px;
+    color: var(--text-gray);
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 80px;
+}
+
+/* HERO */
+.about-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.about-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.about-description {
+    font-size: 15px;
+    color: var(--text-gray);
+    line-height: 1.8;
+}
+
+.about-hero-image {
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.about-hero-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* MISSION */
+.about-mission {
+    background-color: var(--black);
+    padding: 60px 80px;
+    margin: 0 -80px 80px -80px;
+    text-align: center;
+}
+
+.about-mission-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.about-mission-text {
+    font-size: 16px;
+    color: #aaaaaa;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* WHY CHOOSE US */
+.about-why {
+    text-align: center;
+}
+
+.about-why-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 40px;
+}
+
+.about-why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.about-why-card {
+    padding: 30px 20px;
+    border: 0.5px solid #e0e0e0;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: border-color 0.2s ease;
+}
+
+.about-why-card:hover {
+    border-color: var(--blue);
+}
+
+.about-why-icon {
+    width: 44px;
+    height: 44px;
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.about-why-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+}
+
+.about-why-card p {
+    font-size: 13px;
+    color: var(--text-gray);
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .about-container {
+        padding: 40px 24px;
+    }
+
+    .about-mission {
+        margin: 0 -24px 60px -24px;
+        padding: 40px 24px;
+    }
+
+    .about-why-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .about-container {
+        padding: 30px 16px;
+    }
+
+    .about-hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .about-title {
+        font-size: 26px;
+    }
+
+    .about-mission {
+        margin: 0 -16px 40px -16px;
+        padding: 30px 16px;
+    }
+
+    .about-why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .about-why-card {
+        padding: 20px 12px;
+    }
+}

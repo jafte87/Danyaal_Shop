@@ -1,69 +1,61 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { LuTrash2 } from 'react-icons/lu'
-import { useAuth } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
-
 import './CartContent.css'
 
 function CartContent() {
-    const { cartItems, removeFromCart, clearCart, totalPrice } = useCart()
+    const { cartItems, updateQuantity, removeFromCart, clearCart, totalPrice } = useCart()
     const [discountCode, setDiscountCode] = useState('')
     const [discount, setDiscount] = useState(null)
     const [discountError, setDiscountError] = useState('')
     const [shippingOption, setShippingOption] = useState(null)
+    const [shippingOptions, setShippingOptions] = useState([])
     const [checkoutLoading, setCheckoutLoading] = useState(false)
-    const { isAuthenticated, token } = useAuth()
-    const navigate = useNavigate()
 
-    const shippingOptions = [
-        { id: 1, name: 'Standard Delivery', price: 3.99, estimate: '3-5 days' },
-        { id: 2, name: 'Express Delivery', price: 7.99, estimate: '1-2 days' },
-        { id: 3, name: 'Next Day Delivery', price: 12.99, estimate: 'Next day' },
-    ]
+    useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/shipping/')
+        .then(res => res.json())
+        .then(data => setShippingOptions(data))
+        .catch(err => console.error(err))
+    }, [])
 
     const handleCheckout = async () => {
-    
-
-    if (!shippingOption) {
-        alert('Please select a shipping option')
-        return
-    }
-
-    setCheckoutLoading(true)
-
-    try {
-        const res = await fetch('http://127.0.0.1:8000/api/checkout/create-session/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                items: cartItems.map(item => ({
-                    brand: item.brand,
-                    model: item.model,
-                    storage: item.storage,
-                    colour: item.colour,
-                    condition: item.condition,
-                    price: item.price,
-                })),
-                shipping_option: shippingOption,
-                discount_code: discount?.code || '',
-            })
-        })
-        const data = await res.json()
-        if (data.url) {
-            window.location.href = data.url
-        } else {
-            alert('Something went wrong. Please try again.')
+        if (!shippingOption) {
+            alert('Please select a shipping option')
+            return
         }
-    } catch (err) {
-        console.error(err)
-        alert('Something went wrong. Please try again.')
-    } finally {
-        setCheckoutLoading(false)
-    }
+        setCheckoutLoading(true)
+        try {
+            const res = await fetch('http://127.0.0.1:8000/api/checkout/create-session/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    items: cartItems.map(item => ({
+                        brand: item.brand,
+                        model: item.model,
+                        storage: item.storage,
+                        colour: item.colour,
+                        condition: item.condition,
+                        price: item.price,
+                        quantity: item.quantity || 1,
+                    })),
+                    shipping_option: shippingOption,
+                    discount_code: discount?.code || '',
+                })
+            })
+            const data = await res.json()
+            if (data.url) {
+                window.location.href = data.url
+            } else {
+                alert('Something went wrong. Please try again.')
+            }
+        } catch (err) {
+            console.error(err)
+            alert('Something went wrong. Please try again.')
+        } finally {
+            setCheckoutLoading(false)
+        }
     }
 
     const validateDiscount = async () => {
@@ -131,13 +123,26 @@ function CartContent() {
                             <p className="cart-item-condition">{item.warranty_period} Warranty</p>
                         </div>
                         <div className="cart-item-right">
-                            <p className="cart-item-price">£{item.price}</p>
-                            <button
-                                className="cart-item-remove"
-                                onClick={() => removeFromCart(item.id)}
-                            >
-                                <LuTrash2 />
-                            </button>
+                            <p className="cart-item-price">£{(item.price * (item.quantity || 1)).toFixed(2)}</p>
+                            <div className="cart-item-actions">
+                                <div className="cart-qty">
+                                    <button
+                                        className="cart-qty-btn"
+                                        onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
+                                    >−</button>
+                                    <span className="cart-qty-value">{item.quantity || 1}</span>
+                                    <button
+                                        className="cart-qty-btn"
+                                        onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
+                                    >+</button>
+                                </div>
+                                <button
+                                    className="cart-item-remove"
+                                    onClick={() => removeFromCart(item.id)}
+                                >
+                                    <LuTrash2 />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}

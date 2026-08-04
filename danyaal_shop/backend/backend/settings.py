@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
+    'unfold.contrib.filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,27 @@ INSTALLED_APPS = [
     'corsheaders',
     'shop',
 ]
+
+UNFOLD = {
+    'SITE_TITLE': 'Danyaal Shop',
+    'SITE_HEADER': 'Danyaal Shop Admin',
+    'SITE_URL': '/',
+    'COLORS': {
+        'primary': {
+            '50': '240 249 255',
+            '100': '224 242 254',
+            '200': '186 230 253',
+            '300': '125 211 252',
+            '400': '56 189 248',
+            '500': '14 165 233',
+            '600': '2 132 199',
+            '700': '3 105 161',
+            '800': '7 89 133',
+            '900': '12 74 110',
+            '950': '8 47 73',
+        },
+    },
+}
 
 AUTH_USER_MODEL = 'shop.User'
 
@@ -146,4 +169,14 @@ SIMPLE_JWT = {
 
 STRIPE_SECRET_KEY = 'sk_test_51TxlZcQTbyHoDNxlbWsjdaAyrERaqAZ9ATYcKukCzDBJVo8uyL7qSaqW13ZrfyhD2YmN725FuwYaDaMWyGYdAc3Y00Ap77Z7mn'
 STRIPE_PUBLISHABLE_KEY = 'pk_test_51TxlZcQTbyHoDNxlLGnetxlGiMexGx2gcSXQ7h8x5rX0Bajw6Q4mKM0CLEfzeN2jsgMO44TQIkPYM6eXOTHLljY300bNLlLJmC'
-STRIPE_WEBHOOK_SECRET = ''  # leave empty for now
+STRIPE_WEBHOOK_SECRET = 'whsec_2ffd14d55a1b5deb9033cb7f1b986971092316d7b3b823302e9f04b32ba78253'
+
+# Email settings — replace with real credentials before going live
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@gmail.com'        # <<< replace
+EMAIL_HOST_PASSWORD = 'your-app-password'        # <<< replace (use Gmail App Password)
+DEFAULT_FROM_EMAIL = 'Danyaal Shop <your-email@gmail.com>'  # <<< replace
+EMAIL_ORDER_RECIPIENT = 'your-email@gmail.com'  # <<< replace — store owner email

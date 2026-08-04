@@ -36,11 +36,12 @@ function RegisterForm() {
     }
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-        setErrors({ ...errors, [e.target.name]: '' })
-        setGlobalError('')
+    const { name, value, type, checked } = e.target
+    setFormData({ 
+        ...formData, 
+        [name]: type === 'checkbox' ? checked : value 
+    })
     }
-
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!validate()) return
@@ -57,11 +58,19 @@ function RegisterForm() {
                     username: formData.email,
                     password: formData.password,
                     phone_number: formData.phone_number,
+                    newsletter: false,
                 })
             })
             const data = await res.json()
             console.log('Register response:', data) 
             if (res.ok) {
+                if (formData.newsletter) {
+                    await fetch('http://127.0.0.1:8000/api/newsletter/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: formData.email })
+                    })
+                    }
                 const loginRes = await fetch('http://127.0.0.1:8000/api/auth/login/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -177,6 +186,16 @@ function RegisterForm() {
                         />
                         {errors.confirm_password && <span className="field-error">{errors.confirm_password}</span>}
                     </div>
+
+                    <label className="auth-checkbox">
+                        <input
+                        type="checkbox"
+                        name="newsletter"
+                        checked={formData.newsletter}
+                        onChange={handleChange}
+                        />
+                        I'd like to receive news and offers by email (optional)
+                    </label>
 
                     <button type="submit" className="auth-btn" disabled={loading}>
                         {loading ? 'Creating account...' : 'Create Account'}

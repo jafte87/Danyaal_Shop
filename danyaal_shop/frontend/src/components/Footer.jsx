@@ -2,13 +2,53 @@ import { Link } from 'react-router-dom'
 import { FiInstagram, FiFacebook } from 'react-icons/fi'
 import { FaTiktok, FaWhatsapp } from 'react-icons/fa'
 import { SiVisa, SiMastercard, SiApplepay, SiGooglepay} from 'react-icons/si'
+import { useState } from 'react'
 import './Footer.css'
 
 function Footer() {
+
+    const [email, setEmail] = useState('')
+    const [subscribed, setSubscribed] = useState(false)
+
+    const handleNewsletter = async (e) => {
+    e.preventDefault()
+    if (!email) return
+    try {
+        const res = await fetch('http://127.0.0.1:8000/api/newsletter/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        })
+        if (res.ok) setSubscribed(true)
+            } catch (err) {
+            console.error(err)
+            }
+    }
     return (
         <footer className="footer">
             <div className="footer-top">
-
+            
+                {/* NEWSLETTER */}
+                <div className="footer-col">
+                <h4>Newsletter</h4>
+                <p className="footer-sell-text">
+                Get the latest deals and offers straight to your inbox.
+                </p>
+                {subscribed ? (
+                <p className="footer-subscribed">✓ You're subscribed!</p>
+                ) : (
+                <form className="footer-newsletter" onSubmit={handleNewsletter}>
+                <input
+                type="email"
+                placeholder="Your email address"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
+                />
+                <button type="submit">Subscribe</button>
+                </form>
+                )}
+                </div>
                 {/* LOGO + DESCRIPTION */}
                 <div className="footer-brand">
                     <div className="footer-logo">

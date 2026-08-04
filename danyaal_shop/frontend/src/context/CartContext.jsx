@@ -3,29 +3,61 @@ import { createContext, useContext, useState } from 'react'
 const CartContext = createContext()
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([])
-
-  const addToCart = (product) => {
-    setCartItems(prev => {
-      const exists = prev.find(item => item.id === product.id)
-      if (exists) return prev // phones are unique, can't add same twice
-      return [...prev, product]
+    const [cartItems, setCartItems] = useState(() => {
+        try {
+            const stored = localStorage.getItem('cart')
+            return stored ? JSON.parse(stored) : []
+        } catch {
+            return []
+        }
     })
-  }
 
-  const removeFromCart = (productId) => {
-    setCartItems(prev => prev.filter(item => item.id !== productId))
-  }
+    const saveCart = (items) => {
+        setCartItems(items)
+        localStorage.setItem('cart', JSON.stringify(items))
+    }
 
-  const clearCart = () => setCartItems([])
+    // Add product — if already in cart, increase qty instead of blocking
+    const addToCart = (product, qty = 1) => {
+        const existing = cartItems.find(item => item.id === product.id)
+        if (existing) {
+            saveCart(cartItems.map(item =>
+                item.id === product.id
+                    ? { ...item, quantity: (item.quantity || 1) + qty }
+                    : item
+            ))
+        } else {
+            saveCart([...cartItems, { ...product, quantity: qty }])
+        }
+    }
 
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0)
+    // Set exact quantity for a cart item (min 1)
+    const updateQuantity = (productId, qty) => {
+        if (qty < 1) return
+        saveCart(cartItems.map(item =>
+            item.id === productId ? { ...item, quantity: qty } : item
+        ))
+    }
 
-  return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, totalPrice }}>
-      {children}
-    </CartContext.Provider>
-  )
+    const removeFromCart = (productId) => {
+        saveCart(cartItems.filter(item => item.id !== productId))
+    }
+
+    const clearCart = () => {
+        setCartItems([])
+        localStorage.removeItem('cart')
+    }
+
+    // Total respects quantity
+    const totalPrice = cartItems
+        .reduce((sum, item) => sum + parseFloat(item.price) * (item.quantity || 1), 0)
+        .toFixed(2)
+
+    return (
+        <CartContext.Provider value={{ cartItems, addToCart, updateQuantity, removeFromCart, clearCart, totalPrice }}>
+            {children}
+        </CartContext.Provider>
+    )
 }
 
 export const useCart = () => useContext(CartContext)

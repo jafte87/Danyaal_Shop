@@ -24,9 +24,9 @@ urlpatterns = [
 
     # Orders
     path('orders/', views.OrderListView.as_view(), name='order-list'),
-    path('orders/<int:pk>/', views.OrderDetailView.as_view(), name='order-detail'),
     path('orders/create/', views.OrderCreateView.as_view(), name='order-create'),
-
+    path('orders/create-from-session/', views.CreateOrderFromSessionView.as_view(), name='create-order-from-session'),
+    path('orders/<int:pk>/', views.OrderDetailView.as_view(), name='order-detail'),
     # Shipping + Discount
     path('shipping/', views.ShippingOptionListView.as_view(), name='shipping-list'),
     path('discount/validate/', views.DiscountValidateView.as_view(), name='discount-validate'),
@@ -44,7 +44,21 @@ urlpatterns = [
     path('banners/', views.BannerListView.as_view(), name='banner-list'),
     
     path('auth/delete/', views.DeleteAccountView.as_view(), name='delete-account'),
+    path('auth/profile/', views.UserProfileView.as_view(), name='user-profile'),
 
     path('checkout/create-session/', views.CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
+
+    path('about/', views.AboutUsView.as_view(), name='about-us'),
+
+    path('contact-info/', views.ContactInfoView.as_view(), name='contact-info'),
+
+    path('contact/', views.ContactSubmissionView.as_view(), name='contact-submission'),
+
+    path('faqs/', views.FAQListView.as_view(), name='faqs'),
+
+    path('policy/<str:page>/', views.PolicyPageView.as_view(), name='policy-page'),
+
+    path('webhook/', views.StripeWebhookView.as_view(), name='stripe-webhook'),
+
 
 ]

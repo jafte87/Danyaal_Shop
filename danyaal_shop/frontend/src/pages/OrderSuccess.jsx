@@ -9,6 +9,21 @@ function OrderSuccess() {
     const { clearCart } = useCart()
 
     useEffect(() => {
+        const sessionId = new URLSearchParams(window.location.search).get('session_id')
+        if (sessionId) {
+            const token = localStorage.getItem('access_token')
+            const headers = { 'Content-Type': 'application/json' }
+            if (token) headers['Authorization'] = `Bearer ${token}`
+
+            fetch('http://127.0.0.1:8000/api/orders/create-from-session/', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ session_id: sessionId })
+            })
+            .then(res => res.json())
+            .then(data => console.log('Order creation response:', data))
+            .catch(err => console.error('Order creation error:', err))
+        }
         clearCart()
     }, [])
 

@@ -6,6 +6,7 @@ import BenefitsBanner from "../components/BenefitsBanner"
 import Testimonials from '../components/Testimonials'
 import Footer from '../components/Footer'
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 
 function Home() {
     const [bestSellers, setBestSellers] = useState([])
@@ -47,6 +48,10 @@ function Home() {
 
     return (
         <div>
+            <Helmet>
+                <title>Danyaal Shop | Buy &amp; Sell Premium Used Phones in the UK</title>
+                <meta name="description" content="Shop the best quality used iPhones, Samsung, Google Pixel and more at Danyaal Shop. Fully tested, warrantied, and delivered fast across the UK." />
+            </Helmet>
             <Navbar />
             <Banner />
             {loading ? (

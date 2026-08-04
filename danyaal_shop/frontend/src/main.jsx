@@ -1,16 +1,18 @@
 import { BrowserRouter } from 'react-router-dom'
-import { StrictMode } from 'react'
 import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/CartContext'
+import { HelmetProvider } from 'react-helmet-async'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-  <AuthProvider>
-    <CartProvider>
-      <App />
-    </CartProvider>
-  </AuthProvider>
-  </BrowserRouter>
+  <HelmetProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </AuthProvider>
+    </BrowserRouter>
+  </HelmetProvider>
 )

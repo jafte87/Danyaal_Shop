@@ -1,0 +1,57 @@
+--- NEW ORDER REQUEST ---
+session_id: cs_test_b1Qr7MC0VFRBIGbDh1rKBnTmVYXfExNTHj1WnmphMOzhNzZL1iq54lhp9d
+Retrieved session. Status: complete, Payment Status: paid
+UNEXPECTED ERROR: Traceback (most recent call last):
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 171, in __getattr__
+    return self[k]
+           ~~~~^^^
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 224, in __getitem__
+    raise err
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 203, in __getitem__
+    return self._data[k]
+           ~~~~~~~~~~^^^
+KeyError: 'get'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Ok\laundry\phone_shop\danyaal_shop\backend\shop\views.py", line 201, in post
+    customer_details = session.get('customer_details')
+                       ^^^^^^^^^^^
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 173, in __getattr__
+    raise AttributeError(*err.args) from err
+AttributeError: get
+
+--- NEW ORDER REQUEST ---
+session_id: cs_test_b1VkYYubv9C4z7IkPFfjRx8pRaXQH62b6me95Ulkhd3yt6MgHflQQW709a
+Retrieved session. Status: complete, Payment Status: paid
+UNEXPECTED ERROR: Traceback (most recent call last):
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 171, in __getattr__
+    return self[k]
+           ~~~~^^^
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 224, in __getitem__
+    raise err
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 203, in __getitem__
+    return self._data[k]
+           ~~~~~~~~~~^^^
+KeyError: 'get'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Ok\laundry\phone_shop\danyaal_shop\backend\shop\views.py", line 216, in post
+    shipping_option_id = (session.metadata or {}).get('shipping_option_id')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Ok\laundry\phone_shop\venv\Lib\site-packages\stripe\_stripe_object.py", line 173, in __getattr__
+    raise AttributeError(*err.args) from err
+AttributeError: get
+
+--- NEW ORDER REQUEST ---
+session_id: cs_test_b1QUCTH57DOizbIq7LrLQQRLSn55vOag0spKsUT5k9QhKpxMlijxQ2NQJX
+Status: complete, Payment: paid
+Authenticated user: 111@gmail.com
+Creating Order in DB...
+Order #2 created!
+Fetching line items...
+OrderItem created: Pixel Pixel 10 Pro - 512 GB - Black
+SUCCESS: Order #2 fully created

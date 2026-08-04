@@ -28,8 +28,31 @@ function Filters({ filters, onChange, isOpen, onClose }) {
         setOpenSections(prev => ({ ...prev, [section]: !prev[section] }))
     }
 
+    // Click same value again → deselect (set to empty string)
+    const handleToggleFilter = (key, value) => {
+        if (filters[key] === value) {
+            onChange({ ...filters, [key]: '' })
+        } else {
+            onChange({ ...filters, [key]: value })
+        }
+    }
+
     const handleChange = (key, value) => {
         onChange({ ...filters, [key]: value })
+    }
+
+    const FilterOption = ({ filterKey, value, label }) => {
+        const active = filters[filterKey] === value
+        return (
+            <button
+                className={`filter-option-btn ${active ? 'active' : ''}`}
+                onClick={() => handleToggleFilter(filterKey, value)}
+                type="button"
+            >
+                <span className={`filter-checkbox ${active ? 'checked' : ''}`} />
+                {label}
+            </button>
+        )
     }
 
     return (
@@ -53,16 +76,7 @@ function Filters({ filters, onChange, isOpen, onClose }) {
                     {openSections.brand && (
                         <div className="filter-options">
                             {options.brands.map(brand => (
-                                <label key={brand} className="filter-option">
-                                    <input
-                                        type="radio"
-                                        name="brand"
-                                        value={brand}
-                                        checked={filters.brand === brand}
-                                        onChange={() => handleChange('brand', brand)}
-                                    />
-                                    {brand}
-                                </label>
+                                <FilterOption key={brand} filterKey="brand" value={brand} label={brand} />
                             ))}
                         </div>
                     )}
@@ -76,16 +90,12 @@ function Filters({ filters, onChange, isOpen, onClose }) {
                     {openSections.condition && (
                         <div className="filter-options">
                             {options.conditions.map(c => (
-                                <label key={c} className="filter-option">
-                                    <input
-                                        type="radio"
-                                        name="condition"
-                                        value={c}
-                                        checked={filters.condition === c}
-                                        onChange={() => handleChange('condition', c)}
-                                    />
-                                    {c.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                                </label>
+                                <FilterOption
+                                    key={c}
+                                    filterKey="condition"
+                                    value={c}
+                                    label={c.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                                />
                             ))}
                         </div>
                     )}
@@ -99,16 +109,7 @@ function Filters({ filters, onChange, isOpen, onClose }) {
                     {openSections.storage && (
                         <div className="filter-options">
                             {options.storages.map(s => (
-                                <label key={s} className="filter-option">
-                                    <input
-                                        type="radio"
-                                        name="storage"
-                                        value={s}
-                                        checked={filters.storage === s}
-                                        onChange={() => handleChange('storage', s)}
-                                    />
-                                    {s}
-                                </label>
+                                <FilterOption key={s} filterKey="storage" value={s} label={s} />
                             ))}
                         </div>
                     )}
@@ -122,16 +123,7 @@ function Filters({ filters, onChange, isOpen, onClose }) {
                     {openSections.colour && (
                         <div className="filter-options">
                             {options.colours.map(c => (
-                                <label key={c} className="filter-option">
-                                    <input
-                                        type="radio"
-                                        name="colour"
-                                        value={c}
-                                        checked={filters.colour === c}
-                                        onChange={() => handleChange('colour', c)}
-                                    />
-                                    {c}
-                                </label>
+                                <FilterOption key={c} filterKey="colour" value={c} label={c} />
                             ))}
                         </div>
                     )}

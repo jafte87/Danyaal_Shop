@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import Banner from '../components/Banner'
 import Filters from '../components/Filters'
 import ShopCard from '../components/ShopCard'
+import { Helmet } from 'react-helmet-async'
 import '../components/Shop.css'
 
 function Shop() {
@@ -68,6 +69,22 @@ function Shop() {
 
     return (
         <div>
+            <Helmet>
+                <title>
+                    {filters.brand
+                        ? `Buy Used ${filters.brand} Phones | Danyaal Shop`
+                        : 'Shop Used Phones | iPhone, Samsung & More — Danyaal Shop'
+                    }
+                </title>
+                <meta
+                    name="description"
+                    content={
+                        filters.brand
+                            ? `Browse our range of quality used ${filters.brand} phones. Tested, warrantied and ready to ship across the UK.`
+                            : 'Browse our full range of used iPhones, Samsung, Google Pixel and more. Filter by brand, model, storage and condition. UK delivery.'
+                    }
+                />
+            </Helmet>
             <Navbar />
             <Banner page="shop" />
 

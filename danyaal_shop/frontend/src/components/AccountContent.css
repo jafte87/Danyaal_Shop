@@ -366,9 +366,16 @@
     border-color: var(--blue);
 }
 
+.profile-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+}
+
 .profile-save {
-    width: fit-content;
-    padding: 12px 30px;
+    flex: 1;
+    max-width: 200px;
+    padding: 12px 0;
     background-color: var(--black);
     color: var(--white);
     border: none;
@@ -384,8 +391,9 @@
 }
 
 .profile-delete {
-    width: fit-content;
-    padding: 12px 25px;
+    flex: 1;
+    max-width: 200px;
+    padding: 12px 0;
     background-color: transparent;
     color: #ef4444;
     border: 0.5px solid #ef4444;
@@ -394,7 +402,6 @@
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: 'Inter', sans-serif;
-    margin-top: 8px;
 }
 
 .profile-delete:hover {

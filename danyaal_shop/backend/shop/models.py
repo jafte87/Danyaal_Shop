@@ -124,7 +124,7 @@ class Order(models.Model):
         ('delivered', 'Delivered'),
         ('cancelled', 'Cancelled'),
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     shipping_option = models.ForeignKey(ShippingOption, on_delete=models.SET_NULL, null=True)
     shipping_address = models.TextField()
@@ -203,13 +203,22 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return self.email
-    
+
+class AboutUs(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to='about/', blank=True, null=True)
+    mission = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)    
 
 class Banner(models.Model):
     PAGE_CHOICES = [
         ('home', 'Home'),
         ('shop', 'Shop'),
         ('sell', 'Sell Your Phone'),
+        ('about', 'About Us'),
+        ('contact', 'Contact Us'),
+        ('faqs', 'FAQs'),
     ]
     image = models.ImageField(upload_to='banners/')
     mobile_image = models.ImageField(upload_to='banners/', blank=True, null=True)
@@ -225,3 +234,56 @@ class Banner(models.Model):
 
     def __str__(self):
         return f"{self.page} - {self.title or f'Banner #{self.id}'}"
+
+
+class ContactInfo(models.Model):
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    whatsapp = models.CharField(max_length=20)
+    address = models.TextField(blank=True)
+    hours = models.CharField(max_length=100, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"Contact Info"
+
+    class Meta:
+        verbose_name_plural = 'Contact Info'
+
+class ContactSubmission(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True)
+    subject = models.CharField(max_length=100)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.subject}"
+
+class FAQ(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.question
+
+class PolicyPage(models.Model):
+    PAGE_CHOICES = [
+        ('warranty', 'Warranty Information'),
+        ('returns', 'Returns & Refund Policy'),
+        ('privacy', 'Privacy Policy'),
+        ('terms', 'Terms & Conditions'),
+    ]
+    page = models.CharField(max_length=20, choices=PAGE_CHOICES, unique=True)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

@@ -4,7 +4,8 @@ from .models import (
     User, Order, OrderItem, ShippingOption,
     Discount, Wishlist, Testimonial,
     SellYourPhone, SellYourPhoneImage,
-    Newsletter, Banner
+    Newsletter, Banner, AboutUs, ContactInfo,
+    ContactSubmission, FAQ, PolicyPage
 )
 
 
@@ -73,7 +74,8 @@ class OrderSerializer(serializers.ModelSerializer):
             'stripe_payment_id', 'created_at', 'updated_at', 'items'
         ]
         extra_kwargs = {
-            'stripe_payment_id': {'read_only': True}
+            'stripe_payment_id': {'read_only': True},
+            'user': {'read_only': True},
         }
 
 class WishlistSerializer(serializers.ModelSerializer):
@@ -129,3 +131,28 @@ class BannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banner
         fields = ['id', 'image', 'mobile_image', 'title', 'subtitle', 'link', 'order', 'page']
+
+class AboutUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AboutUs
+        fields = ['id', 'title', 'description', 'image', 'mission']
+
+class ContactInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactInfo
+        fields = ['email', 'phone', 'whatsapp', 'address', 'hours']
+
+class ContactSubmissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactSubmission
+        fields = ['name', 'email', 'phone', 'subject', 'message']
+
+class FAQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQ
+        fields = ['id', 'question', 'answer', 'order']
+
+class PolicyPageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PolicyPage
+        fields = ['title', 'content', 'updated_at']

@@ -85,17 +85,6 @@ function Navbar() {
                                             <p className="search-result-price">£{product.price}</p>
                                         </Link>
                                     ))}
-                                    <Link
-                                        to={`/shop?search=${searchQuery}`}
-                                        className="search-see-all"
-                                        onClick={() => {
-                                            setDropdownOpen(false)
-                                            setSearchQuery('')
-                                            setSearchResults([])
-                                        }}
-                                    >
-                                        See all results for "{searchQuery}"
-                                    </Link>
                                 </>
                             ) : (
                                 <div className="search-no-results">
@@ -124,10 +113,9 @@ function Navbar() {
                         </div>
                     </Link>
 
-                    <Link to="/wishlist">
-                        <LuHeart />
+                    <Link to={isAuthenticated ? '/account?tab=wishlist' : '/login'}>
+                         <LuHeart />
                     </Link>
-
                     <IoSearchOutline
                         className="mobile-search-icon"
                         onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
@@ -181,18 +169,6 @@ function Navbar() {
                                             <p className="search-result-price">£{product.price}</p>
                                         </Link>
                                     ))}
-                                    <Link
-                                        to={`/shop?search=${searchQuery}`}
-                                        className="search-see-all"
-                                        onClick={() => {
-                                            setDropdownOpen(false)
-                                            setSearchQuery('')
-                                            setSearchResults([])
-                                            setMobileSearchOpen(false)
-                                        }}
-                                    >
-                                        See all results for "{searchQuery}"
-                                    </Link>
                                 </>
                             ) : (
                                 <div className="search-no-results">
