@@ -693,5 +693,5 @@ class BenefitsBannerView(APIView):
         obj = BenefitsBanner.objects.filter(is_active=True).first()
         if not obj:
             return Response({})
-        serializer = BenefitsBannerSerializer(obj)
+        serializer = BenefitsBannerSerializer(obj, context={'request': request})
         return Response(serializer.data)

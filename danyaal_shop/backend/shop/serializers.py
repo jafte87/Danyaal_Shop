@@ -9,11 +9,24 @@ from .models import (
 )
 
 class BenefitsBannerSerializer(serializers.ModelSerializer):
+    desktop_image = serializers.SerializerMethodField()
+    mobile_image = serializers.SerializerMethodField()
+
     class Meta:
         model = BenefitsBanner
         fields = ['title', 'desktop_image', 'mobile_image', 'is_active']
 
+    def get_desktop_image(self, obj):
+        request = self.context.get('request')
+        if obj.desktop_image and request:
+            return request.build_absolute_uri(obj.desktop_image.url)
+        return None
 
+    def get_mobile_image(self, obj):
+        request = self.context.get('request')
+        if obj.mobile_image and request:
+            return request.build_absolute_uri(obj.mobile_image.url)
+        return None
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
