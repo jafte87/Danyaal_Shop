@@ -10,12 +10,22 @@ import { Helmet } from 'react-helmet-async'
 import '../components/Shop.css'
 import { API_BASE_URL } from '../config'
 
+const QUICK_FILTERS = [
+    { label: 'Best Sellers', key: 'is_best_seller' },
+    { label: 'New Arrivals', key: 'is_new_arrival' },
+    { label: 'Featured',     key: 'is_featured'    },
+]
+
 function Shop() {
     const [searchParams] = useSearchParams()
     const [products, setProducts] = useState([])
     const [filters, setFilters] = useState(() => {
-        const searchFromUrl = searchParams.get('search')
-        return searchFromUrl ? { search: searchFromUrl } : {}
+        const init = {}
+        if (searchParams.get('search'))          init.search          = searchParams.get('search')
+        if (searchParams.get('is_best_seller'))  init.is_best_seller  = 'true'
+        if (searchParams.get('is_new_arrival'))  init.is_new_arrival  = 'true'
+        if (searchParams.get('is_featured'))     init.is_featured     = 'true'
+        return init
     })
     const [filtersOpen, setFiltersOpen] = useState(false)
     const [loading, setLoading] = useState(true)
@@ -26,13 +36,16 @@ function Shop() {
     useEffect(() => {
         setLoading(true)
         const params = new URLSearchParams()
-        if (filters.brand) params.append('brand', filters.brand)
-        if (filters.condition) params.append('condition', filters.condition)
-        if (filters.storage) params.append('storage', filters.storage)
-        if (filters.colour) params.append('colour', filters.colour)
-        if (filters.min_price) params.append('min_price', filters.min_price)
-        if (filters.max_price) params.append('max_price', filters.max_price)
-        if (filters.search) params.append('search', filters.search)
+        if (filters.brand)          params.append('brand', filters.brand)
+        if (filters.condition)      params.append('condition', filters.condition)
+        if (filters.storage)        params.append('storage', filters.storage)
+        if (filters.colour)         params.append('colour', filters.colour)
+        if (filters.min_price)      params.append('min_price', filters.min_price)
+        if (filters.max_price)      params.append('max_price', filters.max_price)
+        if (filters.search)         params.append('search', filters.search)
+        if (filters.is_best_seller) params.append('is_best_seller', 'true')
+        if (filters.is_new_arrival) params.append('is_new_arrival', 'true')
+        if (filters.is_featured)    params.append('is_featured', 'true')
         params.append('page', page)
         params.append('page_size', PAGE_SIZE)
 
@@ -68,6 +81,18 @@ function Shop() {
         setLoading(true)
     }
 
+    const toggleQuickFilter = (key) => {
+        const newFilters = { ...filters }
+        if (newFilters[key]) {
+            delete newFilters[key]
+        } else {
+            // Only one quick-filter active at a time
+            QUICK_FILTERS.forEach(qf => delete newFilters[qf.key])
+            newFilters[key] = 'true'
+        }
+        handleFilterChange(newFilters)
+    }
+
     return (
         <div>
             <Helmet>
@@ -87,7 +112,7 @@ function Shop() {
                 />
             </Helmet>
             <Navbar />
-            <Banner page="shop" />
+            <Banner page="shop" compact />
 
             <div className="shop-container">
                 <Filters
@@ -102,8 +127,22 @@ function Shop() {
                             className="shop-filter-btn"
                             onClick={() => setFiltersOpen(true)}
                         >
-                            <LuFilter />
+                            <LuFilter /> Filters
                         </button>
+
+                        {/* Quick-filter pill buttons */}
+                        <div className="shop-quick-filters">
+                            {QUICK_FILTERS.map(qf => (
+                                <button
+                                    key={qf.key}
+                                    className={`shop-quick-btn ${filters[qf.key] ? 'active' : ''}`}
+                                    onClick={() => toggleQuickFilter(qf.key)}
+                                >
+                                    {qf.label}
+                                </button>
+                            ))}
+                        </div>
+
                         <p className="shop-count">{products.length} products</p>
                     </div>
                     {loading ? (

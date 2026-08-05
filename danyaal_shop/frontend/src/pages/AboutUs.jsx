@@ -12,7 +12,7 @@ function AboutUs() {
                 <meta name="description" content="Learn about Danyaal Shop — your trusted UK source for high-quality used iPhones, Samsung, and more. Honest prices, genuine phones, and outstanding service." />
             </Helmet>
             <Navbar />
-            <Banner page="about" />
+            <Banner page="about" compact />
             <AboutUsContent />
             <Footer />
         </div>

@@ -61,3 +61,30 @@
         height: 280px;
     }
 }
+
+/* ── Compact banner (shop / about-us pages) ─────────────────────── */
+.banner-compact {
+    margin: 20px 32px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.banner-compact .banner-desktop {
+    height: 220px;
+}
+
+.banner-compact .banner-placeholder {
+    height: 220px;
+    border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+    .banner-compact {
+        margin: 16px;
+        border-radius: 12px;
+    }
+    .banner-compact .banner-desktop,
+    .banner-compact .banner-placeholder {
+        height: 150px;
+    }
+}

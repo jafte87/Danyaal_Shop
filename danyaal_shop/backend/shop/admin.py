@@ -57,12 +57,23 @@ class DiscountAdmin(UnfoldModelAdmin):
     list_editable = ('is_active',)
 
 
+# Inline for SellYourPhone images — shown directly inside the submission
+class SellYourPhoneImageInline(UnfoldTabularInline):
+    model = SellYourPhoneImage
+    extra = 1
+    readonly_fields = ('image',)
+
+
 @admin.register(SellYourPhone)
 class SellYourPhoneAdmin(UnfoldModelAdmin):
     list_display = ('brand', 'model', 'storage', 'condition', 'customer_name', 'customer_email', 'created_at')
     list_display_links = ('brand', 'model', 'storage', 'condition', 'customer_name', 'customer_email', 'created_at')
     list_filter = ('brand', 'condition')
     search_fields = ('brand', 'model', 'customer_email', 'customer_name')
+    readonly_fields = ('brand', 'model', 'storage', 'condition', 'network', 'imei',
+                       'customer_name', 'customer_email', 'customer_phone',
+                       'customer_address', 'notes', 'created_at')
+    inlines = [SellYourPhoneImageInline]
 
 
 @admin.register(Newsletter)
@@ -129,6 +140,16 @@ class ShippingOptionAdmin(UnfoldModelAdmin):
     list_editable = ('is_active',)
 
 
+# Wishlist — grouped per user, clean list view
+@admin.register(Wishlist)
+class WishlistAdmin(UnfoldModelAdmin):
+    list_display = ('user', 'product', 'created_at')
+    list_display_links = ('user', 'product', 'created_at')
+    list_filter = ('user',)
+    search_fields = ('user__email', 'user__username', 'product__brand', 'product__model')
+    readonly_fields = ('user', 'product', 'created_at')
+
+
 # Register User with Unfold-aware UserAdmin
 class CustomUserAdmin(UnfoldModelAdmin, UserAdmin):
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
@@ -137,8 +158,6 @@ class CustomUserAdmin(UnfoldModelAdmin, UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Wishlist)
-admin.site.register(SellYourPhoneImage)
 
 
 @admin.register(SocialLinks)

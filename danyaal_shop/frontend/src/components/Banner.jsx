@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './Banner.css'
 import { API_BASE_URL } from '../config'
 
-function Banner({ page = 'home' }) {
+function Banner({ page = 'home', compact = false }) {
     const [banner, setBanner] = useState(null)
 
     useEffect(() => {
@@ -16,14 +16,14 @@ function Banner({ page = 'home' }) {
 
     if (!banner) {
         return (
-            <div className="banner-placeholder">
+            <div className={`banner-placeholder${compact ? ' banner-compact' : ''}`}>
                 <p>{page} banner</p>
             </div>
         )
     }
 
     return (
-        <div className="banner">
+        <div className={`banner${compact ? ' banner-compact' : ''}`}>
             <img src={banner.image} className="banner-desktop" alt="banner" />
             {banner.mobile_image && (
                 <img src={banner.mobile_image} className="banner-mobile" alt="banner" />
