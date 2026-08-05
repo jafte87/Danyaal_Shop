@@ -29,6 +29,9 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*'] # In production, restrict this to your actual Railway URL and custom domains if desired.
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://danyaalproject-production.up.railway.app',
+]
 
 # Application definition
 
