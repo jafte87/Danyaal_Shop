@@ -45,7 +45,7 @@ function ProductPage() {
 
     useEffect(() => {
         // fetch product
-        fetch(`http://127.0.0.1:8000/api/products/${slug}/`)
+        fetch(`${API_BASE_URL}/api/products/${slug}/`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)

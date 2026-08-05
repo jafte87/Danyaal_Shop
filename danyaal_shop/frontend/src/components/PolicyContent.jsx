@@ -7,7 +7,7 @@ function PolicyContent({ page }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/policy/${page}/`)
+        fetch(`${API_BASE_URL}/api/policy/${page}/`)
             .then(res => res.json())
             .then(data => {
                 setPolicy(data)

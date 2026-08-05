@@ -36,7 +36,7 @@ function Shop() {
         params.append('page', page)
         params.append('page_size', PAGE_SIZE)
 
-        fetch(`http://127.0.0.1:8000/api/products/?${params.toString()}`)
+        fetch(`${API_BASE_URL}/api/products/?${params.toString()}`)
             .then(res => {
                 if (!res.ok) {
                     setHasMore(false)

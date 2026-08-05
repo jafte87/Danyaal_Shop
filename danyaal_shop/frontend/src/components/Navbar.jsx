@@ -26,7 +26,7 @@ function Navbar() {
             return
         }
         const timeout = setTimeout(() => {
-            fetch(`http://127.0.0.1:8000/api/products/?search=${searchQuery}`)
+            fetch(`${API_BASE_URL}/api/products/?search=${searchQuery}`)
                 .then(res => res.json())
                 .then(data => {
                     const results = data.results || data
