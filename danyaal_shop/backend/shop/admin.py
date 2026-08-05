@@ -5,7 +5,7 @@ from .models import (
     User, Category, Product, ProductImage,
     ShippingOption, Discount, Order, OrderItem,
     Wishlist, Testimonial, SellYourPhone,
-    SellYourPhoneImage, Newsletter, Banner, ContactInfo,
+    SellYourPhoneImage, Newsletter, Banner, BenefitsBanner, ContactInfo,
     AboutUs, ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
 
@@ -70,9 +70,6 @@ class SellYourPhoneAdmin(UnfoldModelAdmin):
     list_display_links = ('brand', 'model', 'storage', 'condition', 'customer_name', 'customer_email', 'created_at')
     list_filter = ('brand', 'condition')
     search_fields = ('brand', 'model', 'customer_email', 'customer_name')
-    readonly_fields = ('brand', 'model', 'storage', 'condition', 'network', 'imei',
-                       'customer_name', 'customer_email', 'customer_phone',
-                       'customer_address', 'notes', 'created_at')
     inlines = [SellYourPhoneImageInline]
 
 
@@ -89,6 +86,19 @@ class BannerAdmin(UnfoldModelAdmin):
     list_display_links = ('title', 'page')
     list_editable = ('is_active',)
     list_filter = ('page', 'is_active')
+
+@admin.register(BenefitsBanner)
+class BenefitsBannerAdmin(UnfoldModelAdmin):
+    list_display = ('title', 'is_active')
+    list_display_links = ('title',)
+    list_editable = ('is_active',)
+
+    def has_add_permission(self, request):
+        # Only allow one record
+        return not BenefitsBanner.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Testimonial)

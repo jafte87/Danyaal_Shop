@@ -4,9 +4,15 @@ from .models import (
     User, Order, OrderItem, ShippingOption,
     Discount, Wishlist, Testimonial,
     SellYourPhone, SellYourPhoneImage,
-    Newsletter, Banner, AboutUs, ContactInfo,
+    Newsletter, Banner, BenefitsBanner, AboutUs, ContactInfo,
     ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
+
+class BenefitsBannerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BenefitsBanner
+        fields = ['title', 'desktop_image', 'mobile_image', 'is_active']
+
 
 
 class CategorySerializer(serializers.ModelSerializer):

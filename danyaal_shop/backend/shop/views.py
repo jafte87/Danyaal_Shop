@@ -15,14 +15,14 @@ from django.utils.decorators import method_decorator
 from .models import (
     Category, Product, ShippingOption,
     Discount, Order, OrderItem, Wishlist,
-    Testimonial, SellYourPhone, Newsletter, Banner,
+    Testimonial, SellYourPhone, Newsletter, Banner, BenefitsBanner,
     ContactInfo, ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
 from .serializers import (
     CategorySerializer, ProductSerializer, UserSerializer,
     OrderSerializer, OrderItemSerializer, ShippingOptionSerializer,
     DiscountSerializer, WishlistSerializer, TestimonialSerializer,
-    SellYourPhoneSerializer, NewsletterSerializer, BannerSerializer, ContactInfoSerializer,
+    SellYourPhoneSerializer, NewsletterSerializer, BannerSerializer, BenefitsBannerSerializer, ContactInfoSerializer,
     ContactSubmissionSerializer, FAQSerializer, PolicyPageSerializer, SocialLinksSerializer
 )
 from django.db.models import Count
@@ -684,4 +684,14 @@ class SocialLinksView(APIView):
         if not obj:
             return Response({'instagram': '', 'facebook': '', 'tiktok': '', 'whatsapp': '', 'x_twitter': '', 'youtube': ''})
         serializer = SocialLinksSerializer(obj)
+        return Response(serializer.data)
+
+class BenefitsBannerView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        obj = BenefitsBanner.objects.filter(is_active=True).first()
+        if not obj:
+            return Response({})
+        serializer = BenefitsBannerSerializer(obj)
         return Response(serializer.data)
