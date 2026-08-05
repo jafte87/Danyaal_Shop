@@ -12,7 +12,7 @@ function SellYourPhone() {
                 <meta name="description" content="Sell your used iPhone, Samsung, or any smartphone quickly and easily. Get an instant quote from Danyaal Shop — fast payment, hassle-free process." />
             </Helmet>
             <Navbar />
-            <Banner page="sell" />
+            <Banner page="sell" compact />
             <SellYourPhoneForm />
             <Footer />
         </div>

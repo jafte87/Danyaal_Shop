@@ -12,7 +12,7 @@ function FAQs() {
                 <meta name="description" content="Find answers to the most frequently asked questions about buying and selling phones at Danyaal Shop, including delivery, warranty, returns, and more." />
             </Helmet>
             <Navbar />
-            <Banner page="faqs" />
+            <Banner page="faqs" compact />
             <FAQsContent />
             <Footer />
         </div>
