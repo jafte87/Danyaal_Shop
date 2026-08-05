@@ -67,7 +67,7 @@
     width: calc(100% - 128px);
     max-width: 1400px;
     margin: 40px auto;
-    border-radius: 24px;
+    border-radius: 3px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
@@ -78,14 +78,14 @@
 
 .banner-compact .banner-placeholder {
     height: 180px;
-    border-radius: 24px;
+    border-radius: 3px;
 }
 
 @media (max-width: 768px) {
     .banner-compact {
         width: calc(100% - 32px);
         margin: 20px auto;
-        border-radius: 16px;
+        border-radius: 3px;
     }
     .banner-compact .banner-desktop,
     .banner-compact .banner-placeholder {
