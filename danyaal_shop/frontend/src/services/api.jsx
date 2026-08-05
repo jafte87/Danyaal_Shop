@@ -1,4 +1,6 @@
-const BASE_URL = '${API_BASE_URL}/api'
+import { API_BASE_URL } from '../config'
+
+const BASE_URL = `${API_BASE_URL}/api`
 
 const handleResponse = async (res) => {
   if (!res.ok) throw new Error(`HTTP error: ${res.status}`)

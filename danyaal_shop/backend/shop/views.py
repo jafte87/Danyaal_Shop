@@ -535,8 +535,8 @@ class CreateCheckoutSessionView(APIView):
                     'allowed_countries': ['GB'],
                 },
                 discounts=discounts if discounts else [],
-                success_url='http://localhost:5173/order/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url='http://localhost:5173/cart',
+                success_url='https://danyaal-project-wlyy.vercel.app/order/success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url='https://danyaal-project-wlyy.vercel.app/cart',
                 metadata={
                     'user_id': request.user.id if request.user.is_authenticated else None,
                     'discount_code': discount_code,

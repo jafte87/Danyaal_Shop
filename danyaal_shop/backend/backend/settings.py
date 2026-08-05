@@ -167,10 +167,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
+    'https://danyaal-project-wlyy.vercel.app',
 ]
 
 # Allow all origins in production if the frontend domain is unknown, or set properly via env vars
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 from datetime import timedelta
 
