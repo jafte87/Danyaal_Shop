@@ -12,7 +12,9 @@ from django.utils import timezone
 
 def sitemap_xml(request):
     """Dynamic XML sitemap covering all static pages and active product pages."""
-    base = 'https://danyaalshop.com'  # update to real domain before launch
+    host = request.META.get('HTTP_X_FORWARDED_HOST') or request.get_host()
+    scheme = request.META.get('HTTP_X_FORWARDED_PROTO') or request.scheme
+    base = f"{scheme}://{host}"
     today = timezone.now().date().isoformat()
 
     static_pages = [
@@ -62,12 +64,16 @@ def sitemap_xml(request):
 
 def robots_txt(request):
     """Standard robots.txt pointing search engines to the sitemap."""
+    host = request.META.get('HTTP_X_FORWARDED_HOST') or request.get_host()
+    scheme = request.META.get('HTTP_X_FORWARDED_PROTO') or request.scheme
+    base = f"{scheme}://{host}"
+
     lines = [
         'User-agent: *',
         'Disallow: /admin/',
         'Disallow: /api/',
         '',
-        'Sitemap: https://danyaalshop.com/sitemap.xml',
+        f'Sitemap: {base}/sitemap.xml',
     ]
     return HttpResponse('\n'.join(lines), content_type='text/plain')
 
