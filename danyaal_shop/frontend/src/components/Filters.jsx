@@ -11,6 +11,7 @@ function Filters({ filters, onChange, isOpen, onClose }) {
     })
 
     const [openSections, setOpenSections] = useState({
+        special: true,
         brand: true,
         condition: true,
         storage: true,
@@ -67,6 +68,20 @@ function Filters({ filters, onChange, isOpen, onClose }) {
                 <div className="filters-header">
                     <h3>Filters</h3>
                     <button className="filters-close" onClick={onClose}>✕</button>
+                </div>
+
+                {/* SPECIAL */}
+                <div className="filter-section">
+                    <button className="filter-title" onClick={() => toggle('special')}>
+                        Categories <span>{openSections.special ? '−' : '+'}</span>
+                    </button>
+                    {openSections.special && (
+                        <div className="filter-options">
+                            <FilterOption filterKey="is_best_seller" value="true" label="Best Sellers" />
+                            <FilterOption filterKey="is_new_arrival" value="true" label="New Arrivals" />
+                            <FilterOption filterKey="is_featured" value="true" label="Featured Products" />
+                        </div>
+                    )}
                 </div>
 
                 {/* BRAND */}
