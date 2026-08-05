@@ -2,12 +2,14 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import '../components/OrderSuccess.css'
 import { API_BASE_URL } from '../config'
 
 function OrderSuccess() {
     const { clearCart } = useCart()
+    const [orderId, setOrderId] = useState(null)
+    const isLoggedIn = !!localStorage.getItem('access_token')
 
     useEffect(() => {
         const sessionId = new URLSearchParams(window.location.search).get('session_id')
@@ -22,7 +24,11 @@ function OrderSuccess() {
                 body: JSON.stringify({ session_id: sessionId })
             })
             .then(res => res.json())
-            .then(data => console.log('Order creation response:', data))
+            .then(data => {
+                if (data && data.order_id) {
+                    setOrderId(data.order_id)
+                }
+            })
             .catch(err => console.error('Order creation error:', err))
         }
         clearCart()
@@ -35,9 +41,14 @@ function OrderSuccess() {
                 <div className="success-box">
                     <div className="success-icon">✓</div>
                     <h1>Order Confirmed!</h1>
+                    {orderId && (
+                        <p className="success-order-id">Order #{orderId}</p>
+                    )}
                     <p>Thank you for your purchase. You'll receive a confirmation email shortly.</p>
                     <Link to="/shop" className="success-btn">Continue Shopping</Link>
-                    <Link to="/account" className="success-orders">View My Orders</Link>
+                    {isLoggedIn && (
+                        <Link to="/account" className="success-orders">View My Orders</Link>
+                    )}
                 </div>
             </div>
             <Footer />

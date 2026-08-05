@@ -9,6 +9,7 @@ from django.conf import settings as django_settings
 from .models import AboutUs
 from .serializers import AboutUsSerializer
 import json
+import threading
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .models import (
@@ -326,9 +327,13 @@ class CreateOrderFromSessionView(APIView):
             if not customer_email and user:
                 customer_email = user.email
                 customer_name = customer_name or f'{user.first_name} {user.last_name}'.strip() or user.email
-            fresh_items = order.items.select_related('product').all()
-            send_order_confirmation_email(order, fresh_items, customer_email, customer_name, shipping_address)
-            log_debug(f'Emails dispatched for Order #{order.id}')
+            fresh_items = list(order.items.select_related('product').all())
+            threading.Thread(
+                target=send_order_confirmation_email,
+                args=(order, fresh_items, customer_email, customer_name, shipping_address),
+                daemon=True
+            ).start()
+            log_debug(f'Email dispatching started in background for Order #{order.id}')
 
             return Response({'status': 'created', 'order_id': order.id})
 
@@ -653,15 +658,19 @@ class StripeWebhookView(APIView):
                         )
                     except Product.DoesNotExist:
                         pass
-            # ---- Send confirmation emails via webhook path ----
+            # ---- Send confirmation emails in background thread (avoids blocking the webhook response) ----
             customer_details_w = session.get('customer_details', {})
             customer_email_w = customer_details_w.get('email') if customer_details_w else None
             customer_name_w = customer_details_w.get('name') if customer_details_w else None
             if not customer_email_w and user:
                 customer_email_w = user.email
                 customer_name_w = customer_name_w or f'{user.first_name} {user.last_name}'.strip() or user.email
-            fresh_items_w = order.items.select_related('product').all()
-            send_order_confirmation_email(order, fresh_items_w, customer_email_w, customer_name_w, shipping_address)
+            fresh_items_w = list(order.items.select_related('product').all())
+            threading.Thread(
+                target=send_order_confirmation_email,
+                args=(order, fresh_items_w, customer_email_w, customer_name_w, shipping_address),
+                daemon=True
+            ).start()
 
         except Exception as e:
             print('WEBHOOK ERROR:', str(e))
