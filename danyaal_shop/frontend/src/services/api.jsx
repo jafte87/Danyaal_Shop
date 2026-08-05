@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8000/api'
+const BASE_URL = 'API_BASE_URL/api'
 
 const handleResponse = async (res) => {
   if (!res.ok) throw new Error(`HTTP error: ${res.status}`)
