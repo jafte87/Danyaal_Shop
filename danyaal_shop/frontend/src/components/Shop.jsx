@@ -27,7 +27,7 @@ function Shop() {
         if (filters.min_price) params.append('min_price', filters.min_price)
         if (filters.max_price) params.append('max_price', filters.max_price)
 
-        fetch(`http://127.0.0.1:8000/api/products/?${params.toString()}`)
+        fetch(`${API_BASE_URL}/api/products/?${params.toString()}`)
             .then(res => res.json())
             .then(data => {
                 if (page === 1) {
