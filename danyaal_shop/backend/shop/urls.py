@@ -43,6 +43,7 @@ urlpatterns = [
     # Banners
     path('banners/', views.BannerListView.as_view(), name='banner-list'),
     path('benefits-banner/', views.BenefitsBannerView.as_view(), name='benefits-banner'),
+    path('section-backgrounds/', views.SectionBackgroundView.as_view(), name='section-backgrounds'),
     
     path('auth/delete/', views.DeleteAccountView.as_view(), name='delete-account'),
     path('auth/profile/', views.UserProfileView.as_view(), name='user-profile'),

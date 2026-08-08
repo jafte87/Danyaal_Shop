@@ -16,7 +16,15 @@ function Home() {
     const [loading, setLoading] = useState(true)
     const [testimonials, setTestimonials] = useState([])
 
+    const [sectionBgs, setSectionBgs] = useState({})
+
     useEffect(() => {
+        // Fetch Section Backgrounds
+        fetch(`${API_BASE_URL}/api/section-backgrounds/`)
+            .then(res => res.json())
+            .then(data => setSectionBgs(data))
+            .catch(err => console.error(err))
+
         // Best Sellers
         fetch(`${API_BASE_URL}/api/products/?is_best_seller=true`)
             .then(res => res.json())
@@ -59,17 +67,19 @@ function Home() {
                 <p>Loading...</p>
             ) : (
                 <>
-                    <BestSellers products={bestSellers} />
+                    <BestSellers products={bestSellers} backgroundImage={sectionBgs.best_sellers} />
                     <BrandSection
                         title="New Arrivals"
                         products={newArrivals}
                         seeAllLink="/shop?is_new_arrival=true"
+                        backgroundImage={sectionBgs.new_arrivals}
                     />
 
                     <BrandSection
                         title="Featured Products"
                         products={featuredProducts}
                         seeAllLink="/shop?is_featured=true"
+                        backgroundImage={sectionBgs.featured_products}
                     />
                 </>
             )}

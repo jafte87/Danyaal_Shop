@@ -5,7 +5,7 @@ from .models import (
     User, Category, Product, ProductImage,
     ShippingOption, Discount, Order, OrderItem,
     Wishlist, Testimonial, SellYourPhone,
-    SellYourPhoneImage, Newsletter, Banner, BenefitsBanner, ContactInfo,
+    SellYourPhoneImage, Newsletter, Banner, BenefitsBanner, SectionBackground, ContactInfo,
     AboutUs, ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
 
@@ -99,6 +99,12 @@ class BenefitsBannerAdmin(UnfoldModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(SectionBackground)
+class SectionBackgroundAdmin(UnfoldModelAdmin):
+    list_display = ('get_section_display', 'is_active')
+    list_filter = ('is_active',)
 
 
 @admin.register(Testimonial)

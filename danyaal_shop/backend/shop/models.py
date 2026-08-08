@@ -209,7 +209,7 @@ class AboutUs(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='about/', blank=True, null=True)
     mission = models.TextField(blank=True)
-    is_active = models.BooleanField(default=True)    
+    is_active = models.BooleanField(default=True)
 
 class Banner(models.Model):
     PAGE_CHOICES = [
@@ -246,6 +246,26 @@ class BenefitsBanner(models.Model):
         return self.title
 
 
+class SectionBackground(models.Model):
+    SECTION_CHOICES = [
+        ('best_sellers', 'Best Sellers'),
+        ('new_arrivals', 'New Arrivals'),
+        ('featured_products', 'Featured Products'),
+    ]
+    section = models.CharField(
+        max_length=30, choices=SECTION_CHOICES, unique=True
+    )
+    background_image = models.ImageField(upload_to='sections/')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.get_section_display()
+
+    class Meta:
+        verbose_name = 'Section Background'
+        verbose_name_plural = 'Section Backgrounds'
+
+
 class ContactInfo(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
@@ -255,7 +275,7 @@ class ContactInfo(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"Contact Info"
+        return "Contact Info"
 
     class Meta:
         verbose_name_plural = 'Contact Info'

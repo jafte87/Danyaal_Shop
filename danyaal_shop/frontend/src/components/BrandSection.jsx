@@ -6,7 +6,7 @@ import { useWishlist } from '../hooks/useWishlist'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import './BrandSection.css'
 
-function BrandSection({ title, products, seeAllLink }) {
+function BrandSection({ title, products, seeAllLink, backgroundImage }) {
     const scrollRef = useRef(null)
     const navigate = useNavigate()
     const { toggleWishlist, isInWishlist } = useWishlist()
@@ -19,7 +19,14 @@ function BrandSection({ title, products, seeAllLink }) {
 
     return (
         <section className="brand-section">
-            <div className="brand-banner">
+            <div 
+                className="brand-banner"
+                style={backgroundImage ? { 
+                    backgroundImage: `url(${backgroundImage})`, 
+                    backgroundSize: 'cover', 
+                    backgroundPosition: 'center' 
+                } : {}}
+            >
                 {/* TOP ROW */}
                 <div className="brand-top-row">
                     <h2 className="brand-title">{title}</h2>
