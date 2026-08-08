@@ -126,9 +126,17 @@
     border-left: 2px solid var(--blue); /* accent left border */
 }
 
+.bs-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    margin: 0;
+}
+
 .bs-top-row {
     display: flex;
-    justify-content: flex-end; /* see all on the right */
+    justify-content: space-between; /* changed from flex-end to space-between to accommodate title */
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -207,6 +215,7 @@
     .bs-banner {
         margin: 0;
         padding: 30px 16px;
+        background-image: var(--bg-mobile) !important;
     }
 
     .bs-scroll-btn {

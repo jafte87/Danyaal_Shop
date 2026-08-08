@@ -22,9 +22,11 @@ function BrandSection({ title, products, seeAllLink, backgroundImage }) {
             <div 
                 className="brand-banner"
                 style={backgroundImage ? { 
-                    backgroundImage: `url(${backgroundImage})`, 
+                    '--bg-desktop': backgroundImage.desktop ? `url(${backgroundImage.desktop})` : 'none', 
+                    '--bg-mobile': backgroundImage.mobile ? `url(${backgroundImage.mobile})` : (backgroundImage.desktop ? `url(${backgroundImage.desktop})` : 'none'),
                     backgroundSize: 'cover', 
-                    backgroundPosition: 'center' 
+                    backgroundPosition: 'center',
+                    backgroundImage: 'var(--bg-desktop)'
                 } : {}}
             >
                 {/* TOP ROW */}

@@ -24,14 +24,17 @@ function BestSellers({ products, backgroundImage }) {
         <div 
             className="bs-banner" 
             style={backgroundImage ? { 
-                backgroundImage: `url(${backgroundImage})`, 
+                '--bg-desktop': backgroundImage.desktop ? `url(${backgroundImage.desktop})` : 'none', 
+                '--bg-mobile': backgroundImage.mobile ? `url(${backgroundImage.mobile})` : (backgroundImage.desktop ? `url(${backgroundImage.desktop})` : 'none'),
                 backgroundSize: 'cover', 
-                backgroundPosition: 'center' 
+                backgroundPosition: 'center',
+                backgroundImage: 'var(--bg-desktop)'
             } : {}}
         >
             <div className="bs-content">
-                {/* TOP ROW — see all only */}
+                {/* TOP ROW — title and see all */}
                 <div className="bs-top-row">
+                    <h2 className="bs-title">Best Sellers</h2>
                     <Link to="/shop?is_best_seller=true" className="bs-see-all">
                         See All
                     </Link>

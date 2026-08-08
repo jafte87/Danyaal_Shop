@@ -256,6 +256,7 @@ class SectionBackground(models.Model):
         max_length=30, choices=SECTION_CHOICES, unique=True
     )
     background_image = models.ImageField(upload_to='sections/')
+    mobile_background_image = models.ImageField(upload_to='sections/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):

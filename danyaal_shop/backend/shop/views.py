@@ -707,5 +707,8 @@ class SectionBackgroundView(APIView):
         # e.g. { 'best_sellers': 'https://...', 'new_arrivals': 'https://...' }
         bg_dict = {}
         for bg in serializer.data:
-            bg_dict[bg['section']] = bg['background_image']
+            bg_dict[bg['section']] = {
+                'desktop': bg['background_image'],
+                'mobile': bg['mobile_background_image']
+            }
         return Response(bg_dict)

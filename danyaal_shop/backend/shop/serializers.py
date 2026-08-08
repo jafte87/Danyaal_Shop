@@ -31,16 +31,24 @@ class BenefitsBannerSerializer(serializers.ModelSerializer):
 
 class SectionBackgroundSerializer(serializers.ModelSerializer):
     background_image = serializers.SerializerMethodField()
+    mobile_background_image = serializers.SerializerMethodField()
 
     class Meta:
         model = SectionBackground
-        fields = ['section', 'background_image', 'is_active']
+        fields = ['section', 'background_image', 'mobile_background_image', 'is_active']
 
     def get_background_image(self, obj):
         request = self.context.get('request')
         if obj.background_image and request:
             return request.build_absolute_uri(obj.background_image.url)
         return None
+
+    def get_mobile_background_image(self, obj):
+        request = self.context.get('request')
+        if obj.mobile_background_image and request:
+            return request.build_absolute_uri(obj.mobile_background_image.url)
+        return None
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
