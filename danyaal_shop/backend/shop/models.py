@@ -3,12 +3,18 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import UploadedFile
 
 
 def compress_image(image_field, max_width=1920, quality=85):
     """Resize to max_width and re-save as JPEG at given quality."""
     if not image_field:
         return
+        
+    # Only compress if it's a newly uploaded file, not an already saved file
+    if getattr(image_field, 'file', None) and not isinstance(image_field.file, UploadedFile):
+        return
+        
     try:
         from PIL import Image as PilImage
         img = PilImage.open(image_field)
@@ -269,13 +275,11 @@ class Banner(models.Model):
         return f"{self.page} - {self.title or f'Banner #{self.id}'}"
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         if self.image:
             compress_image(self.image, max_width=1920)
-            super().save(update_fields=['image'])
         if self.mobile_image:
             compress_image(self.mobile_image, max_width=768)
-            super().save(update_fields=['mobile_image'])
+        super().save(*args, **kwargs)
 
 
 class BenefitsBanner(models.Model):
@@ -288,13 +292,11 @@ class BenefitsBanner(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         if self.desktop_image:
             compress_image(self.desktop_image, max_width=1920)
-            super().save(update_fields=['desktop_image'])
         if self.mobile_image:
             compress_image(self.mobile_image, max_width=768)
-            super().save(update_fields=['mobile_image'])
+        super().save(*args, **kwargs)
 
 
 class SectionBackground(models.Model):
@@ -314,13 +316,11 @@ class SectionBackground(models.Model):
         return self.get_section_display()
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         if self.background_image:
             compress_image(self.background_image, max_width=1920)
-            super().save(update_fields=['background_image'])
         if self.mobile_background_image:
             compress_image(self.mobile_background_image, max_width=768)
-            super().save(update_fields=['mobile_background_image'])
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Section Background'
