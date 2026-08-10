@@ -1,31 +1,31 @@
 .banner {
     width: 100%;
     overflow: hidden;
-    background-color: #111; /* dark fallback while image loads */
+    background-color: #111;
 }
 
-/* Desktop banner — 1920×500px recommended */
+/* Desktop main banner — aspect ratio 1920:500 */
 .banner-desktop {
     width: 100%;
-    height: 500px;
+    aspect-ratio: 1920 / 500;
     object-fit: cover;
     object-position: center center;
     display: block;
 }
 
-/* Mobile banner — 768×400px recommended */
+/* Mobile main banner — aspect ratio 768:380 */
 .banner-mobile {
     display: none;
     width: 100%;
-    height: 380px;
+    aspect-ratio: 768 / 380;
     object-fit: cover;
     object-position: center center;
 }
 
-/* Placeholder shown when no banner is uploaded yet */
+/* Placeholder when no banner uploaded */
 .banner-placeholder {
     width: 100%;
-    height: 500px;
+    aspect-ratio: 1920 / 500;
     background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
     display: flex;
     align-items: center;
@@ -34,12 +34,6 @@
     font-size: 13px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-}
-
-@media (max-width: 1024px) {
-    .banner-desktop {
-        height: 380px;
-    }
 }
 
 @media (max-width: 768px) {
@@ -52,17 +46,11 @@
     }
 
     .banner-placeholder {
-        height: 300px;
+        aspect-ratio: 768 / 380;
     }
 }
 
-@media (max-width: 480px) {
-    .banner-mobile {
-        height: 280px;
-    }
-}
-
-/* ── Compact banner (shop / about-us pages) ─────────────────────── */
+/* ── Compact banner (shop / about-us etc.) ─────────────────── */
 .banner-compact {
     width: calc(100% - 128px);
     max-width: 1400px;
@@ -71,12 +59,13 @@
     overflow: hidden;
 }
 
+/* Desktop compact — aspect ratio 1400:180 */
 .banner-compact .banner-desktop {
-    height: 180px;
+    aspect-ratio: 1400 / 180;
 }
 
 .banner-compact .banner-placeholder {
-    height: 180px;
+    aspect-ratio: 1400 / 180;
     border-radius: 3px;
 }
 
@@ -86,8 +75,10 @@
         margin: 20px auto;
         border-radius: 3px;
     }
+
+    /* Mobile compact — aspect ratio 768:120 */
     .banner-compact .banner-desktop,
     .banner-compact .banner-placeholder {
-        height: 120px;
+        aspect-ratio: 768 / 120;
     }
 }

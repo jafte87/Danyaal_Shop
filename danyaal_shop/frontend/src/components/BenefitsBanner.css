@@ -4,28 +4,28 @@
     overflow: hidden;
 }
 
-/* Benefits banner — 1920×350px recommended (wide, not tall — it's a strip) */
+/* Desktop — aspect ratio 1920:350 */
 .benefits-desktop {
     width: 100%;
-    height: 350px;
+    aspect-ratio: 1920 / 350;
     object-fit: cover;
     object-position: center;
     display: block;
 }
 
-/* Mobile — 768×500px recommended (taller to fit stacked benefits text/icons) */
+/* Mobile — aspect ratio 768:480 (taller because content stacks vertically) */
 .benefits-mobile {
     display: none;
     width: 100%;
-    height: 480px;
+    aspect-ratio: 768 / 480;
     object-fit: cover;
     object-position: center;
 }
 
-/* Placeholder shown when no image is uploaded */
+/* Placeholder when no image uploaded */
 .benefits-placeholder {
     width: 100%;
-    height: 350px;
+    aspect-ratio: 1920 / 350;
     background: linear-gradient(90deg, #0d0d0d 0%, #1a1a2e 50%, #0d0d0d 100%);
     display: flex;
     align-items: center;
@@ -46,16 +46,10 @@
     }
 
     .benefits-placeholder {
-        height: 480px;
+        aspect-ratio: 768 / 480;
     }
 
     .benefits-banner {
         margin: 40px 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .benefits-mobile {
-        height: 380px;
     }
 }
