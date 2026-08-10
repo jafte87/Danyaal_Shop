@@ -87,11 +87,17 @@ class BannerAdmin(UnfoldModelAdmin):
     list_editable = ('is_active',)
     list_filter = ('page', 'is_active')
 
+    class Media:
+        js = ('shop/admin/compress_images.js',)
+
 @admin.register(BenefitsBanner)
 class BenefitsBannerAdmin(UnfoldModelAdmin):
     list_display = ('title', 'is_active')
     list_display_links = ('title',)
     list_editable = ('is_active',)
+
+    class Media:
+        js = ('shop/admin/compress_images.js',)
 
     def has_add_permission(self, request):
         # Only allow one record
@@ -105,6 +111,9 @@ class BenefitsBannerAdmin(UnfoldModelAdmin):
 class SectionBackgroundAdmin(UnfoldModelAdmin):
     list_display = ('get_section_display', 'is_active')
     list_filter = ('is_active',)
+
+    class Media:
+        js = ('shop/admin/compress_images.js',)
 
 
 @admin.register(Testimonial)
