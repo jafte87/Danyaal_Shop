@@ -4,22 +4,19 @@
     background-color: #111;
 }
 
-/* Desktop main banner — aspect ratio 1920:500 */
+/* Desktop — scales naturally with the image's own ratio */
 .banner-desktop {
     width: 100%;
-    aspect-ratio: 1920 / 500;
-    object-fit: cover;
-    object-position: center center;
+    height: auto;
     display: block;
+    object-fit: initial;
 }
 
-/* Mobile main banner — aspect ratio 768:380 */
+/* Mobile */
 .banner-mobile {
     display: none;
     width: 100%;
-    aspect-ratio: 768 / 380;
-    object-fit: cover;
-    object-position: center center;
+    height: auto;
 }
 
 /* Placeholder when no banner uploaded */
@@ -50,7 +47,7 @@
     }
 }
 
-/* ── Compact banner (shop / about-us etc.) ─────────────────── */
+/* ── Compact banner (shop page) ─────────────────────── */
 .banner-compact {
     width: calc(100% - 128px);
     max-width: 1400px;
@@ -59,9 +56,9 @@
     overflow: hidden;
 }
 
-/* Desktop compact — aspect ratio 1400:180 */
 .banner-compact .banner-desktop {
-    aspect-ratio: 1400 / 180;
+    width: 100%;
+    height: auto;
 }
 
 .banner-compact .banner-placeholder {
@@ -76,8 +73,6 @@
         border-radius: 3px;
     }
 
-    /* Mobile compact — aspect ratio 768:120 */
-    .banner-compact .banner-desktop,
     .banner-compact .banner-placeholder {
         aspect-ratio: 768 / 120;
     }
