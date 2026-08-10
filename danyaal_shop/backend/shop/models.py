@@ -302,34 +302,6 @@ class BenefitsBanner(models.Model):
         super().save(*args, **kwargs)
 
 
-class SectionBackground(models.Model):
-    SECTION_CHOICES = [
-        ('best_sellers', 'Best Sellers'),
-        ('new_arrivals', 'New Arrivals'),
-        ('featured_products', 'Featured Products'),
-    ]
-    section = models.CharField(
-        max_length=30, choices=SECTION_CHOICES, unique=True
-    )
-    background_image = models.ImageField(upload_to='sections/')
-    mobile_background_image = models.ImageField(upload_to='sections/', blank=True, null=True)
-    is_active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.get_section_display()
-
-    def save(self, *args, **kwargs):
-        if self.background_image:
-            compress_image(self.background_image, max_width=1920)
-        if self.mobile_background_image:
-            compress_image(self.mobile_background_image, max_width=768)
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = 'Section Background'
-        verbose_name_plural = 'Section Backgrounds'
-
-
 class ContactInfo(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)

@@ -15,14 +15,14 @@ from django.utils.decorators import method_decorator
 from .models import (
     Category, Product, ShippingOption,
     Discount, Order, OrderItem, Wishlist,
-    Testimonial, SellYourPhone, Newsletter, Banner, BenefitsBanner, SectionBackground,
+    Testimonial, SellYourPhone, Newsletter, Banner, BenefitsBanner,
     ContactInfo, ContactSubmission, FAQ, PolicyPage, SocialLinks
 )
 from .serializers import (
     CategorySerializer, ProductSerializer, UserSerializer,
     OrderSerializer, OrderItemSerializer, ShippingOptionSerializer,
     DiscountSerializer, WishlistSerializer, TestimonialSerializer,
-    SellYourPhoneSerializer, NewsletterSerializer, BannerSerializer, BenefitsBannerSerializer, SectionBackgroundSerializer, ContactInfoSerializer,
+    SellYourPhoneSerializer, NewsletterSerializer, BannerSerializer, BenefitsBannerSerializer, ContactInfoSerializer,
     ContactSubmissionSerializer, FAQSerializer, PolicyPageSerializer, SocialLinksSerializer
 )
 from django.db.models import Count
@@ -696,19 +696,3 @@ class BenefitsBannerView(APIView):
         serializer = BenefitsBannerSerializer(obj, context={'request': request})
         return Response(serializer.data)
 
-
-class SectionBackgroundView(APIView):
-    permission_classes = [AllowAny]
-
-    def get(self, request):
-        backgrounds = SectionBackground.objects.filter(is_active=True)
-        serializer = SectionBackgroundSerializer(backgrounds, many=True, context={'request': request})
-        # return as a dict for easy lookup by section name on frontend
-        # e.g. { 'best_sellers': 'https://...', 'new_arrivals': 'https://...' }
-        bg_dict = {}
-        for bg in serializer.data:
-            bg_dict[bg['section']] = {
-                'desktop': bg['background_image'],
-                'mobile': bg['mobile_background_image']
-            }
-        return Response(bg_dict)
