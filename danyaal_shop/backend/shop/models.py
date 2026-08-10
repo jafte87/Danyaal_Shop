@@ -18,6 +18,12 @@ def compress_image(image_field, max_width=1920, quality=85):
     try:
         from PIL import Image as PilImage
         img = PilImage.open(image_field)
+        
+        # Resize FIRST to drastically reduce memory usage during mode conversion
+        if img.width > max_width:
+            ratio = max_width / img.width
+            img = img.resize((max_width, int(img.height * ratio)), PilImage.LANCZOS)
+            
         # Convert to RGB (JPEG doesn't support transparency)
         if img.mode in ('RGBA', 'LA', 'P'):
             background = PilImage.new('RGB', img.size, (255, 255, 255))
@@ -28,10 +34,7 @@ def compress_image(image_field, max_width=1920, quality=85):
             img = background
         elif img.mode != 'RGB':
             img = img.convert('RGB')
-        # Resize if wider than max_width
-        if img.width > max_width:
-            ratio = max_width / img.width
-            img = img.resize((max_width, int(img.height * ratio)), PilImage.LANCZOS)
+            
         output = BytesIO()
         img.save(output, format='JPEG', quality=quality, optimize=True)
         output.seek(0)
