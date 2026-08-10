@@ -3,7 +3,7 @@
 }
 
 .brand-banner {
-    background-color: var(--gray);
+    background-color: transparent;
     padding: 60px 40px;
     border-radius: 3px;
     margin: 0;
