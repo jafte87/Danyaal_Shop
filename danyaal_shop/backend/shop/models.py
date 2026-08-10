@@ -1,6 +1,39 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
+from io import BytesIO
+from django.core.files.base import ContentFile
+
+
+def compress_image(image_field, max_width=1920, quality=85):
+    """Resize to max_width and re-save as JPEG at given quality."""
+    if not image_field:
+        return
+    try:
+        from PIL import Image as PilImage
+        img = PilImage.open(image_field)
+        # Convert to RGB (JPEG doesn't support transparency)
+        if img.mode in ('RGBA', 'LA', 'P'):
+            background = PilImage.new('RGB', img.size, (255, 255, 255))
+            if img.mode == 'RGBA':
+                background.paste(img, mask=img.split()[3])
+            else:
+                background.paste(img.convert('RGBA'), mask=img.convert('RGBA').split()[3])
+            img = background
+        elif img.mode != 'RGB':
+            img = img.convert('RGB')
+        # Resize if wider than max_width
+        if img.width > max_width:
+            ratio = max_width / img.width
+            img = img.resize((max_width, int(img.height * ratio)), PilImage.LANCZOS)
+        output = BytesIO()
+        img.save(output, format='JPEG', quality=quality, optimize=True)
+        output.seek(0)
+        base_name = image_field.name.rsplit('.', 1)[0] + '.jpg'
+        image_field.save(base_name, ContentFile(output.read()), save=False)
+    except Exception:
+        pass  # If compression fails, keep original
+
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=20, blank=True)
@@ -235,6 +268,15 @@ class Banner(models.Model):
     def __str__(self):
         return f"{self.page} - {self.title or f'Banner #{self.id}'}"
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image:
+            compress_image(self.image, max_width=1920)
+            super().save(update_fields=['image'])
+        if self.mobile_image:
+            compress_image(self.mobile_image, max_width=768)
+            super().save(update_fields=['mobile_image'])
+
 
 class BenefitsBanner(models.Model):
     title = models.CharField(max_length=100, default='Benefits Banner')
@@ -244,6 +286,15 @@ class BenefitsBanner(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.desktop_image:
+            compress_image(self.desktop_image, max_width=1920)
+            super().save(update_fields=['desktop_image'])
+        if self.mobile_image:
+            compress_image(self.mobile_image, max_width=768)
+            super().save(update_fields=['mobile_image'])
 
 
 class SectionBackground(models.Model):
@@ -261,6 +312,15 @@ class SectionBackground(models.Model):
 
     def __str__(self):
         return self.get_section_display()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.background_image:
+            compress_image(self.background_image, max_width=1920)
+            super().save(update_fields=['background_image'])
+        if self.mobile_background_image:
+            compress_image(self.mobile_background_image, max_width=768)
+            super().save(update_fields=['mobile_background_image'])
 
     class Meta:
         verbose_name = 'Section Background'
